@@ -1,0 +1,58 @@
+# REQ.UNIVERSAL: Professional open projects SHOULD include CITATION.cff.
+# WHY: Support correct citation and attribution.
+# ALT: Internal or private repositories may omit citation metadata; remove or modify this file as appropriate.
+# CUSTOM: Update author, repository, license, and keyword fields to reflect project specifics.
+# USAGE: Update fields below; see https://citation-file-format.github.io/ for details.
+
+cff-version: "1.2.0"
+type: software
+
+title: "Templates"
+version: "0.9.0"
+date-released: "2026-01"
+
+authors:
+  - family-names: Case
+    given-names: Denise M.
+    orcid: "https://orcid.org/0000-0001-6165-7389"
+
+repository-code: "https://github.com/denisecase/templates"
+url: "https://github.com/denisecase/templates"
+license: MIT
+
+keywords:
+  # identity
+  - templates
+  - developer-tools
+  - project-templates
+  - project-scaffolding
+  - documentation-templates
+
+  # audience
+  - education
+  - teaching
+  - learning
+  - students
+  - instructors
+  - computer-science-education
+  - software-engineering-education
+
+  # practices
+  - src-layout
+  - ci-cd
+  - github-actions
+  - reproducible-research
+  - software-quality
+  - professional-practice
+
+  # tooling signals
+  - open-source
+  - uv
+  - ruff
+  - mkdocs
+  - git
+
+abstract: >
+  Templates repository for reusable project components and configurations.
+
+message: "If using this project, please cite it as described in this file."

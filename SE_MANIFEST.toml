@@ -1,0 +1,53 @@
+# ============================================================
+# SE_MANIFEST.toml Templates (Current versions only)
+# ============================================================
+
+schema = "se-manifest-1"
+
+[repo]
+name = "templates"
+org = "denisecase"
+kind = "software"
+status = "academic"
+since = "2026"
+summary = "Templates repository for reusable project components and configurations."
+
+[layer]
+space = "Software Engineering"
+role = "post-secondary-education"
+
+[depends]
+required = []
+optional = ["python>=3.12", "uv", "mkdocs", "ruff", "pyright", "pytest"]
+
+[provides]
+artifacts = [
+    "ANNOTATIONS.md",
+    "CITATION.cff",
+    "LICENSE",
+    "README.md",
+    "SE_MANIFEST.toml",
+    "templates/",
+]
+
+[scope]
+includes = [
+    "project templates",
+    "pre-configured tools",
+    "documentation scaffolding",
+]
+excludes = []
+
+[citation]
+cff = "CITATION.cff"
+preferred = "repo"
+bib_hint = "case2026-templates"
+
+[traceability]
+identifier_map = "none"
+
+[meta]
+# Keywords live only in CITATION.cff (canonical).
+framework = "Structural Explainability"
+framework_url = "https://github.com/structural-explainability"
+framework_note = "Provides definitions and conventions for SE_MANIFEST semantics."
