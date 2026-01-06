@@ -19,6 +19,8 @@ Each file should generally be self-documenting.
 Pre-commit is optional; CI will report exact commands if it fails.
 
 Steps to run pre-commit locally. Install `uv`.
+In GitHub Repository Settings, click `Pages` on the left, then
+set `Build and Deploy` / `Source` to **GitHub Actions**.
 
 Initialize once:
 
