@@ -2,17 +2,14 @@
   "name": "Python 3.12 (uv-based)",
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
 
-  "postCreateCommand": "uv sync --extra dev --extra docs --upgrade",
+  "postCreateCommand": "python -m pip install --upgrade pip && python -m pip install uv && uv sync --extra dev --extra docs --upgrade",
 
   "customizations": {
     "vscode": {
-      "settings": {
-        "terminal.integrated.defaultProfile.linux": "bash"
-      },
       "extensions": [
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "charliermarsh.ruff",
+        "astral-sh.ruff",
         "editorconfig.editorconfig",
         "redhat.vscode-yaml",
         "tamasfe.even-better-toml",

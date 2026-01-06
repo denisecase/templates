@@ -60,7 +60,7 @@ This option is disabled by default to keep the project local-first.
 
 If you choose to try this option:
 
-1. Rename the file from `devcontainer_OPTION.json` to `devcontainer.json`.
+1. Rename the file from `.devcontainer/devcontainer_OPTION.json` to `.devcontainer/devcontainer.json`.
 2. Reopen VS Code to accept recommendations.
 
 Then:
