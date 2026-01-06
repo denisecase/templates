@@ -14,35 +14,20 @@
 Nothing is required to use the template files. Just copy and paste as needed.
 Each file should generally be self-documenting.
 
-## Developer
+## Developer (running pre-commit)
 
-Install:
+Pre-commit is optional; CI will report exact commands if it fails.
 
-- Git
-- uv
-- Visual Studio Code (VS Code)
+Steps to run pre-commit locally. Install `uv`.
 
-Get a copy:
-
-```shell
-git clone https://github.com/YOURACCOUNT/templates
-cd templates
-code .
-```
-
-Initialize:
+Initialize once:
 
 ```shell
 uv self update
 uv python pin 3.12
 uv sync --extra dev --extra docs --upgrade
-```
-
-After editing:
-
-```shell
-uv run ruff check .
-uv run ruff format .
+uvx pre-commit install
+uvx pre-commit run --all-files
 ```
 
 Build and serve docs:
@@ -68,4 +53,3 @@ git push -u origin main
 See `.github\workflows` for available GitHub actions.
 
 See `.devcontainer` for alternatives to local development.
-
