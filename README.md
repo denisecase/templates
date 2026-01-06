@@ -1,11 +1,10 @@
-# templates
+# Templates
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/MIT)
-[![Deploy Docs](https://github.com/denisecase/template/actions/workflows/deploy-docs.yml/badge.svg?branch=main)](https://github.com/denisecase/template/actions/workflows/deploy-docs.yml)
-![Build Status](https://github.com/denisecase/template/actions/workflows/ci-hygiene-mkdocs.yml/badge.svg?branch=main)
-[![Check Links](https://github.com/denisecase/template/actions/workflows/links.yml/badge.svg)](https://github.com/denisecase/template/actions/workflows/links.yml)
-[![Dependabot](https://img.shields.io/badge/Dependabot-enabled-brightgreen.svg)](https://github.com/denisecase/template/security/dependabot)
-
+[![Docs (MkDocs)](https://github.com/denisecase/templates/actions/workflows/deploy-mkdocs.yml/badge.svg?branch=main)](https://denisecase.github.io/templates/)
+![Build Status](https://github.com/denisecase/templates/actions/workflows/ci-hygiene-mkdocs.yml/badge.svg?branch=main)
+[![Check Links](https://github.com/denisecase/templates/actions/workflows/links.yml/badge.svg)](https://github.com/denisecase/templates/actions/workflows/links.yml)
+[![Dependabot](https://img.shields.io/badge/Dependabot-enabled-brightgreen.svg)](https://github.com/denisecase/templates/security/dependabot)
 
 > Current versions of software engineering project files
 
