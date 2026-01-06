@@ -13,7 +13,7 @@
 Nothing is required to use the template files. Just copy and paste as needed.
 Each file should generally be self-documenting.
 
-## Developer (running pre-commit)
+## Developer
 
 Pre-commit is optional; CI will report exact commands if it fails.
 

@@ -5,11 +5,11 @@ It provides a ready-to-run cloud-based development environment
 using GitHub Codespaces or VS Code Dev Containers.
 
 **Local development is still recommended.**
-This option exists as a fallback for students who:
+This option exists as a fallback when:
 
-- have difficulty installing Python locally
-- are working on a restricted machine
-- want a temporary, browser-based environment
+- there are difficulties installing locally
+- working on a restricted machine
+- using a temporary, browser-based environment
 
 ## What a Dev Container Is (and Is Not)
 
@@ -18,19 +18,17 @@ A dev container:
 - runs a real Linux environment in the cloud
 - includes Python 3.12
 - installs project dependencies using the **same commands** used locally
-- lets you run code, tests, and tools in a terminal
+- enables running code, tests, and tools in a terminal
 
 A dev container is **not**:
 
-- required for this course
+- required
 - a different workflow
-- a replacement for learning local setup
+- a complete replacement for local setup
 
-Everything you do in a dev container mirrors the local workflow.
+Workflow in a dev container should mirror local workflow.
 
-## What This Dev Container Does
-
-The dev container:
+## This Dev Container
 
 - Uses a standard Python 3.12 image
 - Runs the same dependency install command used locally:
@@ -79,11 +77,11 @@ Then:
 - Usage limits may apply
 - This course does not require Codespaces
 
-The local setup (with tools installed on your machine) is recommended.
+Local setup (with tools installed on a local machine) is recommended.
 
 ## Summary
 
 - Dev containers are optional
 - Local development is preferred
 - The workflow is intentionally identical
-- The configuration exists to provide options if/when needed
+- The configuration provides options if/when needed
