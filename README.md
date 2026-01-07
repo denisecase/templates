@@ -3,25 +3,36 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/MIT)
 [![Docs (MkDocs)](https://github.com/denisecase/templates/actions/workflows/deploy-mkdocs.yml/badge.svg?branch=main)](https://denisecase.github.io/templates/)
 ![Build Status](https://github.com/denisecase/templates/actions/workflows/ci-hygiene-mkdocs.yml/badge.svg?branch=main)
-[![Check Links](https://github.com/denisecase/templates/actions/workflows/links.yml/badge.svg)](https://github.com/denisecase/templates/actions/workflows/links.yml)
-[![Dependabot](https://img.shields.io/badge/Dependabot-enabled-brightgreen.svg)](https://github.com/denisecase/templates/security/dependabot)
+[![Check Links](https://github.com/denisecase/templates/actions/workflows/links.yml/badge.svg?branch=main)](https://github.com/denisecase/templates/actions/workflows/links.yml)
+[![Dependabot](https://img.shields.io/badge/Dependabot-enabled-brightgreen.svg)](https://github.com/denisecase/templates/security/)
 
 > Current versions of software engineering project files
 
 ## Requirements
 
-Nothing is required to use the template files. Just copy and paste as needed.
+Nothing is required to use the template files.
+Just copy and paste as needed.
 Each file should generally be self-documenting.
 
-## Developer
+## To Host an MkDocs Site (Like This)
 
-Pre-commit is optional; CI will report exact commands if it fails.
+While viewing your GitHub repository in the browser, click the Settings (gear) icon.
 
-Steps to run pre-commit locally. Install `uv`.
-In GitHub Repository Settings, click `Pages` on the left, then
-set `Build and Deploy` / `Source` to **GitHub Actions**.
+1. Click the **Pages** tab.
 
-Initialize once:
+   - Set **Build and deployment** / **Source** to **GitHub Actions**
+
+2. (Optional, but required if you keep the Dependabot badge)
+   - Click the **Security & analysis** tab
+   - Enable **Dependabot alerts**
+
+## Developer (Updating The Documentation)
+
+Pre-commit is optional; GitHub Actions will report issues if it fails.
+
+Steps to run pre-commit locally (optional).
+First, install `uv`.
+Then, initialize once:
 
 ```shell
 uv self update
@@ -54,3 +65,19 @@ git push -u origin main
 See `.github\workflows` for available GitHub actions.
 
 See `.devcontainer` for alternatives to local development.
+
+## Annotations
+
+[ANNOTATIONS.md](./ANNOTATIONS.md)
+
+## Citation
+
+[CITATION.cff](./CITATION.cff)
+
+## License
+
+[MIT](./LICENSE)
+
+## SE Manifest
+
+[SE_MANIFEST.md](./SE_MANIFEST.toml)

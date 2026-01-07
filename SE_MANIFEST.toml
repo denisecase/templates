@@ -1,8 +1,17 @@
 # ============================================================
-# SE_MANIFEST.toml Templates (Current versions only)
+# SE_MANIFEST.toml (Repository Intent, Scope, and Role)
 # ============================================================
 
 schema = "se-manifest-1"
+schema_url = "https://github.com/structural-explainability/spec-se/blob/main/manifests/se-manifest-1.md"
+
+[meta]
+# Non-normative contextual information
+framework = "Structural Explainability"
+framework_url = "https://github.com/structural-explainability"
+framework_note = "Provides definitions and conventions for SE_MANIFEST semantics."
+description = "Declarative claim of repository intent, scope, and role."
+purpose = "To make explicit the boundaries, responsibilities, and expectations of this repository relative to others."
 
 [repo]
 name = "templates"
@@ -18,7 +27,7 @@ role = "post-secondary-education"
 
 [depends]
 required = []
-optional = ["python>=3.12", "uv", "mkdocs", "ruff", "pyright", "pytest"]
+optional = ["python>=3.12", "uv", "mkdocs", "lychee"]
 
 [provides]
 artifacts = [
@@ -36,7 +45,11 @@ includes = [
     "pre-configured tools",
     "documentation scaffolding",
 ]
-excludes = []
+excludes = [
+    "programming",
+    "analytics",
+    "statistical modeling",
+]
 
 [citation]
 cff = "CITATION.cff"
@@ -45,9 +58,3 @@ bib_hint = "case2026-templates"
 
 [traceability]
 identifier_map = "none"
-
-[meta]
-# Keywords live only in CITATION.cff (canonical).
-framework = "Structural Explainability"
-framework_url = "https://github.com/structural-explainability"
-framework_note = "Provides definitions and conventions for SE_MANIFEST semantics."

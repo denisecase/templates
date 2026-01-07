@@ -1,10 +1,12 @@
-# RUFF STRICT CONFIG (ruff.strict.toml)
+# ============================================================
+# ruff.strict.toml (Stricter Ruff linter configuration)
+# ============================================================
 #
 # This file is OPTIONAL and stricter than pyproject.toml.
 # It extends pyproject.toml [tool.ruff] configuration with additional rules.
 #
 # USES:
-#   - instructors/maintainers before publishing template updates
+#   - maintainers before publishing template updates
 #   - those who want a higher bar
 #
 # NOTES:
