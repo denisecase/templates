@@ -43,11 +43,6 @@ docs = [
 "Repo" = "https://github.com/denisecase/templates"
 "Issues" = "https://github.com/denisecase/templates/issues"
 
-[tool.uv]
-package = false # REQ.UV: Disable universal versioning for non-packages.
-# WHY: This project is not intended to be distributed as a package.
-
-
 # === PYRIGHT (TYPE CHECKING HELPS FIND COMMON ERRORS BEFORE THE CODE RUNS) ===
 
 [tool.pyright]
@@ -136,3 +131,7 @@ force-sort-within-sections = true
 "tests/**/*.py" = ["D", "B018", "B011","S101"]
 "src/**/py.typed" = ["ALL"]
 "**/*.log" = ["ALL"]
+
+[tool.uv]
+package = false # REQ.UV: Disable universal versioning for non-packages.
+# WHY: This project is not intended to be distributed as a package.

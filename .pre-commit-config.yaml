@@ -15,9 +15,9 @@
 #   Install uv (once, user-level).
 #   uv self update
 #   uvx pre-commit install
-#   uvx pre-commit run --all-files (just once, to check all files)
-# Subsequent commits will AUTOMATICALLY run pre-commit hooks after git add
-# and before git commit.
+#   uvx pre-commit run --all-files # REQ: just once, to enable pre-commit
+# Subsequent commits in this repo will ALWAYS AUTOMATICALLY run
+# pre-commit hooksafter git add and before git commit.
 #
 # NOTE: pre-commit is optional.
 #   Repositories do NOT require Python, uv, or pre-commit to clone or commit.
@@ -48,7 +48,7 @@ exclude: |
   )
 
 repos:
-  # === REPO: PRE-COMMIT HOOKS (cross-platform, zero configu) ===
+  # === REPO: PRE-COMMIT HOOKS (cross-platform, zero config) ===
   #
   # These hooks prevent problems that show up later as:
   #   - mysterious diffs

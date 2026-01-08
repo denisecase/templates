@@ -10,17 +10,21 @@
 # OBS: These hooks use and do NOT override:
 #   - .editorconfig (whitespace / indentation)
 #   - .gitattributes (EOL normalization)
+#   - pyproject.toml (Python tool settings)
 #
 # OPTIONAL LOCAL USAGE (no repo venv required):
-#   Install uv (once, user-level).
+#   You must have uv installed locally.
+#   Run these commands ONCE in from the repo root to enable pre-commit:
+#
 #   uv self update
 #   uvx pre-commit install
-#   uvx pre-commit run --all-files (just once, to check all files)
-# Subsequent commits will AUTOMATICALLY run pre-commit hooks after git add
-# and before git commit.
+#   uvx pre-commit run --all-files
 #
-# NOTE: pre-commit is optional.
-#   Repositories do NOT require Python, uv, or pre-commit to clone or commit.
+# This enables the pre-commit hooks for this project repo.
+# ALL subsequent commits in this repo will AUTOMATICALLY run these
+# pre-commit hooks, after `git add` and before `git commit`.
+#
+# NOTE: enabling pre-commit is optional. It is not needed to clone or commit.
 
 exclude: |
   (?x)^(
@@ -48,7 +52,7 @@ exclude: |
   )
 
 repos:
-  # === REPO: PRE-COMMIT HOOKS (cross-platform, zero configu) ===
+  # === REPO: PRE-COMMIT HOOKS (cross-platform, zero config) ===
   #
   # These hooks prevent problems that show up later as:
   #   - mysterious diffs

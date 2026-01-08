@@ -3,6 +3,11 @@
 # REQ: Create account on arxiv.org and start a paper submission before using this
 # ALT: Manual trigger only, use as needed to publish new versions on arXiv
 
+# TODO: NEEDS CUSTOMIZATION:
+# - Update main .tex filename in step D1
+# - Update content directories in step D1
+# - Update .bbl filename in step D1 (if applicable)
+
 name: Prepare arXiv Source
 
 on:
@@ -13,18 +18,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      # ============================================================
+      # ASSEMBLE: Get code and set up environment
+      # ============================================================
+
+      - name: A1) Checkout repository code
+        # WHY: Needed to access files for checks.
         uses: actions/checkout@v6
 
       # WHY: Install TeX Live in CI in a maintainable way
       # OBS: This action installs tlmgr, but does not install TeX packages unless specified
-      - name: Setup TeX Live
+      - name: A2) Setup TeX Live
         uses: TeX-Live/setup-texlive-action@v3
         with:
           package-file: .github/tl_packages
           cache: true
 
-      - name: Confirm TeX binaries available
+      - name: A3) Confirm TeX binaries available
         run: |
           set -e
           kpsewhich authblk.sty
@@ -33,8 +43,12 @@ jobs:
           which latexmk
           latexmk --version
 
+      # ============================================================
+      # === DEPLOY: Build and deploy ===
+      # ============================================================
+
       # WHY: Create clean staging area with only files arXiv needs
-      - name: Create staging directory
+      - name: D1) Create staging directory
         run: |
           mkdir -p arxiv_src
 
@@ -53,7 +67,7 @@ jobs:
           fi
 
       # WHY: arXiv builds from source - doesn't need build artifacts
-      - name: Clean auxiliary files
+      - name: D2) Clean auxiliary files
         working-directory: arxiv_src
         run: |
           # WHY: Remove LaTeX auxiliary files from local builds
@@ -65,14 +79,14 @@ jobs:
           \) -delete
 
       # WHY: arXiv requires submission as zip file
-      - name: Create arXiv source zip
+      - name: D3) Create arXiv source zip
         run: |
           cd arxiv_src
           zip -r ../arxiv-source.zip .
 
       # WHY: Download this artifact to upload to arxiv.org
       # OBS: Artifact available for download from Actions tab after workflow runs
-      - name: Upload arXiv source artifact
+      - name: D4) Upload arXiv source artifact
         uses: actions/upload-artifact@v6
         with:
           name: arxiv-source
@@ -80,7 +94,7 @@ jobs:
           if-no-files-found: error # WHY: Fail if packaging didn't work
 
       # WHY: Debugging step to verify contents of staging area
-      - name: Debug list files
+      - name: D5) Debug list files
         shell: bash
         run: |
           set -e
@@ -94,11 +108,10 @@ jobs:
           echo "Find PDFs:"
           find . -type f -name "*.pdf" -print
 
-
       # WHY: Provide a compiled PDF for manual verification before arXiv submission
       # OBS: This PDF is NOT included in the arXiv source zip
       # OBS: Allows manual confirmation that the staged bundle compiles as expected
-      - name: Upload compiled PDF (CI check)
+      - name: D6) Upload compiled PDF (CI check)
         uses: actions/upload-artifact@v6
         with:
           name: compiled-pdf
