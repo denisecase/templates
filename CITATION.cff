@@ -13,16 +13,22 @@ type: software
 
 title: "Templates"
 version: "0.9.0"
-date-released: "2026-01"
+date-released: "2026-01-11"
 
 authors:
   - family-names: Case
     given-names: Denise M.
     orcid: "https://orcid.org/0000-0001-6165-7389"
+    affiliation: "Northwest Missouri State University, School of Computer Science and Information Systems, Maryville, MO, USA"
 
 repository-code: "https://github.com/denisecase/templates"
 url: "https://github.com/denisecase/templates"
 license: MIT
+
+abstract: >
+  Templates repository providing reusable project components,
+  configuration files, and documentation scaffolding
+  for professional Python and analytics projects.
 
 keywords:
   # identity
@@ -36,8 +42,7 @@ keywords:
   - education
   - teaching
   - learning
-  - students
-  - instructors
+  - practitioners
   - computer-science-education
   - software-engineering-education
 
@@ -45,18 +50,18 @@ keywords:
   - src-layout
   - ci-cd
   - github-actions
-  - reproducible-research
+  - reproducible-workflows
   - software-quality
   - professional-practice
 
-  # tooling signals
+  # tools and ecosystem
+  - python
+  - git
+  - github
+  - pre-commit
   - open-source
   - uv
   - ruff
   - mkdocs
-  - git
-
-abstract: >
-  Templates repository for reusable project components and configurations.
 
 message: "If using this project, please cite it as described in this file."

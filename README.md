@@ -36,26 +36,25 @@ Then, initialize once:
 
 ```shell
 uv self update
-uv python pin 3.12
+uv python pin 3.14
 uv sync --extra dev --extra docs --upgrade
+
 uvx pre-commit install
+git add -A
 uvx pre-commit run --all-files
 ```
 
-Build and serve docs:
+Build and serve docs (hit **CTRL+c** in the VS Code terminal to quit serving):
 
 ```shell
 uv run mkdocs build --strict
 uv run mkdocs serve
 ```
 
-> To stop a running Python program, press `Ctrl + C` in the terminal
-
-Save progress:
+Save progress frequently (some tools may make changes; you may need to **re-run git `add` and `commit`** to ensure everything gets committed before pushing):
 
 ```shell
 git add -A
-# If pre-commit makes changes, re-run `git add -A` before committing.
 git commit -m "update"
 git push -u origin main
 ```

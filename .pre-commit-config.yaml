@@ -1,26 +1,31 @@
 # ============================================================
-# .pre-commit-config.yaml (Markdown Hygiene)
+# .pre-commit-config.yaml (Python Hygiene)
 # ============================================================
-# VARIANT: markdown-hygiene
+# VARIANT: python-hygiene
 # SOURCE: https://github.com/denisecase/templates
 #
-# REQ: Documentation-only repos MAY include a .pre-commit-config.yaml for repo hygiene (optional).
-# WHY: Keep Markdown diffs clean across OSes and prevent common documentation commit errors.
+# REQ: Professional Python projects SHOULD include a .pre-commit-config.yaml
+# to minimize git diffs and support collaboration.
+# WHY: Provide fast, consistent checks before committing code.
 #
 # OBS: These hooks use and do NOT override:
 #   - .editorconfig (whitespace / indentation)
 #   - .gitattributes (EOL normalization)
+#   - pyproject.toml (Python tool settings)
 #
 # OPTIONAL LOCAL USAGE (no repo venv required):
-#   Install uv (once, user-level).
+#   You must have uv installed locally.
+#   Run these commands ONCE in from the repo root to enable pre-commit:
+#
 #   uv self update
 #   uvx pre-commit install
-#   uvx pre-commit run --all-files # REQ: just once, to enable pre-commit
-# Subsequent commits in this repo will ALWAYS AUTOMATICALLY run
-# pre-commit hooksafter git add and before git commit.
+#   uvx pre-commit run --all-files
 #
-# NOTE: pre-commit is optional.
-#   Repositories do NOT require Python, uv, or pre-commit to clone or commit.
+# This enables the pre-commit hooks for this project repo.
+# ALL subsequent commits in this repo will AUTOMATICALLY run these
+# pre-commit hooks, after `git add` and before `git commit`.
+#
+# NOTE: enabling pre-commit is optional. It is not needed to clone or commit.
 
 exclude: |
   (?x)^(
@@ -99,6 +104,20 @@ repos:
 
       - id: check-case-conflict
         name: C3) Check for filename case conflicts
+
+  # === REPO: RUFF PRE-COMMIT (for Python code) ===
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+      # === RUFF PRE-COMMIT CHECKS ===
+      - id: ruff-format
+        name: D1) Ruff format (before linting)
+
+      - id: ruff
+        name: D2) Ruff linter (autofix errors, style issues )
+        args: [--fix, --exit-non-zero-on-fix]
+
 
 # === GLOBAL SETTINGS ===
 # ALT: Set fail_fast to true to stop at first failure.

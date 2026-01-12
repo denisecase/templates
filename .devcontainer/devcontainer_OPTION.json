@@ -1,6 +1,6 @@
 {
-  "name": "Python 3.12 (uv-based)",
-  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "name": "Python 3.14 (uv-based)",
+  "image": "mcr.microsoft.com/devcontainers/python:3.14",
 
   "postCreateCommand": "python -m pip install --upgrade pip && python -m pip install uv && uv sync --extra dev --extra docs --upgrade",
 

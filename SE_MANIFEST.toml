@@ -12,6 +12,7 @@ framework_url = "https://github.com/structural-explainability"
 framework_note = "Provides definitions and conventions for SE_MANIFEST semantics."
 description = "Declarative claim of repository intent, scope, and role."
 purpose = "To make explicit the boundaries, responsibilities, and expectations of this repository relative to others."
+keywords_note = "Keywords live only in CITATION.cff (canonical)."
 
 [repo]
 name = "templates"
@@ -26,8 +27,21 @@ space = "Software Engineering"
 role = "post-secondary-education"
 
 [depends]
-required = []
-optional = ["python>=3.12", "uv", "mkdocs", "lychee"]
+# WHY: These tools are required to complete and run the project as designed
+#      (local development, execution, and dependency management).
+required = [
+  "python>=3.14",
+  "uv",
+  "git",
+]
+# WHY: Optional tools are not required to use or run the repository.
+optional = [
+  "mkdocs",
+  "ruff",
+  "pyright",
+  "pytest",
+  "lychee",
+]
 
 [provides]
 artifacts = [
@@ -36,7 +50,7 @@ artifacts = [
     "LICENSE",
     "README.md",
     "SE_MANIFEST.toml",
-    "templates/",
+    "templates",
 ]
 
 [scope]

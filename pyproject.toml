@@ -9,7 +9,7 @@
 name = "templates" # CUSTOM: Package distribution name (use lowercase and dashes).
 version="0.9.0"  # WHY: start with initial version.
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 license = "MIT"
 authors = [
   { name = "Denise Case", email = "dcase@nwmissouri.edu" }
@@ -24,8 +24,8 @@ dev = [
     "pre-commit>=4.5.1",
     "pytest>=9.0.2",
     "pytest-cov>=7.0.0",
-    "pyright>=1.1.407",
-    "ruff>=0.14.10",
+    "pyright>=1.1.408",
+    "ruff>=0.14.11",
     "validate-pyproject>=0.24.1",
 ]
 
@@ -53,7 +53,7 @@ docs = [
 # WHY: Strict type checking helps catch bugs early.
 
 typeCheckingMode = "strict"
-pythonVersion = "3.12"
+pythonVersion = "3.14"
 include = ["src"]
 extraPaths = ["src"]
 exclude = [ "**/node_modules", "**/.*", ".venv","**/__pycache__","dist","build"]
@@ -97,7 +97,7 @@ exclude = [
 ]
 line-length = 88 # WHY: PEP 8 standard line length, wrap when possible.
 preview = false # WHY: Stable features only; avoid preview features.
-target-version = "py312"
+target-version = "py313" # WHY: Match latest supported Python version.
 unsafe-fixes = false # WHY: Avoid potentially unsafe automatic fixes.
 
 [tool.ruff.format]

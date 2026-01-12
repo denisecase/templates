@@ -1,87 +1,71 @@
-# Optional: Development Container (GitHub Codespaces)
+# Optional: Cloud Development Environment (GitHub Codespaces)
 
-This repository includes an **optional development container** configuration.
-It provides a ready-to-run cloud-based development environment
-using GitHub Codespaces or VS Code Dev Containers.
+This repository includes an **optional development container** configuration
+intended for use with **GitHub Codespaces**.
 
-**Local development is still recommended.**
-This option exists as a fallback when:
+It provides a ready-to-run Linux-based development environment in the cloud.
+The workflow inside Codespaces mirrors the local workflow used in the project.
 
-- there are difficulties installing locally
-- working on a restricted machine
-- using a temporary, browser-based environment
+**Local development is still recommended and is the primary learning path.**
+This cloud option exists only as a fallback when:
 
-## What a Dev Container Is (and Is Not)
+- local installation is not possible
+- working on a restricted or shared machine
+- a temporary, browser-based environment is needed
+
+## Dev Container (Conceptual Overview)
 
 A dev container:
 
-- runs a real Linux environment in the cloud
-- includes Python 3.12
+- runs a Linux environment in the cloud
+- includes Python (version specified in the configuration file)
 - installs project dependencies using the **same commands** used locally
-- enables running code, tests, and tools in a terminal
+- allows running code, tests, and tools in a terminal
 
 A dev container is **not**:
 
 - required
-- a different workflow
-- a complete replacement for local setup
-
-Workflow in a dev container should mirror local workflow.
+- a replacement for learning local Python setup
+- part of the preferred workflow
 
 ## This Dev Container
 
-- Uses a standard Python 3.12 image
-- Runs the same dependency install command used locally:
+This configuration:
 
-```bash
-  uv sync --extra dev --extra docs --upgrade
-```
+- uses a standard Python base image
+- runs the same dependency install command used locally
+- does **not** add databases, services, or exposed ports
+- is intentionally minimal and predictable
 
-- Does not add additional services, databases, or ports
-- Keeps the environment intentionally simple and predictable
+There is no Codespaces-specific build system.
 
-There is no special Codespaces-only build system.
+## Important Windows Note
 
-## Editor Settings and Extensions
+Using containers locally typically requires Docker and/or WSL on Windows.
 
-VS Code settings and extensions inside the dev container are intentionally
-aligned with the repository root configuration at `.vscode/extensions.json`.
+**We do not support or recommend local Dev Containers on Windows.**
 
-When updating the root `.vscode/` folder, update this file to stay in sync.
+## How to Use (Optional, Cloud Only)
 
-This avoids:
+This option is disabled to keep the project local-first.
 
-- conflicting editor behavior
-- different tooling expectations between local and container users
+If you choose to try GitHub Codespaces:
 
-## How to Use (Optional)
+1. Rename `.devcontainer/devcontainer_OPTION.json` to `.devcontainer/devcontainer.json`
+2. Git add-commit-push the repository to your GitHub account
+3. Open the repository on GitHub
+4. Select **Code / Codespaces / Create codespace**
+5. Wait for the environment to build
+6. Use the same commands shown in `README.md`
 
-This option is disabled by default to keep the project local-first.
+No additional configuration is required.
 
-If you choose to try this option:
+## GitHub Codespaces
 
-1. Rename the file from `.devcontainer/devcontainer_OPTION.json` to `.devcontainer/devcontainer.json`.
-2. Reopen VS Code to accept recommendations.
+GitHub Codespaces provides a cloud-based development environment that runs
+in a web browser (or in VS Code), hosted by GitHub.
 
-Then:
-
-1. Push the repository to your GitHub account
-2. Open the repository on GitHub
-3. Click Code / Codespaces / Create codespace
-4. Wait for the environment to build
-5. Use the same commands shown in the repo README.md
-
-## Notes on Cost and Availability
-
-- GitHub may provide free Codespaces usage for verified students
+- Free usage may be available for verified students
 - Usage limits may apply
-- This course does not require Codespaces
-
-Local setup (with tools installed on a local machine) is recommended.
-
-## Summary
-
-- Dev containers are optional
-- Local development is preferred
-- The workflow is intentionally identical
-- The configuration provides options if/when needed
+- Because users may incur charges, this option is not recommended.
+- If you choose to explore Codespaces, monitor costs and use external documentation or support resources.

@@ -118,6 +118,7 @@ repos:
         name: D2) Ruff linter (autofix errors, style issues )
         args: [--fix, --exit-non-zero-on-fix]
 
+
 # === GLOBAL SETTINGS ===
 # ALT: Set fail_fast to true to stop at first failure.
 fail_fast: false # Run all hooks even if one fails
