@@ -11,9 +11,9 @@
 cff-version: "1.2.0"
 type: software
 
-title: "Templates"
-version: "0.9.0"
-date-released: "2026-01-11"
+title: "templates"
+version: "0.1.0"
+date-released: "2026-06-06"
 
 authors:
   - family-names: Case
@@ -31,30 +31,17 @@ abstract: >
   for professional Python and analytics projects.
 
 keywords:
-  # identity
   - templates
   - developer-tools
   - project-templates
   - project-scaffolding
   - documentation-templates
-
-  # audience
-  - education
-  - teaching
-  - learning
-  - practitioners
-  - computer-science-education
-  - software-engineering-education
-
-  # practices
   - src-layout
   - ci-cd
   - github-actions
   - reproducible-workflows
   - software-quality
   - professional-practice
-
-  # tools and ecosystem
   - python
   - git
   - github
@@ -62,6 +49,6 @@ keywords:
   - open-source
   - uv
   - ruff
-  - mkdocs
+
 
 message: "If using this project, please cite it as described in this file."

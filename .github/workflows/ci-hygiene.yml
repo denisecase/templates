@@ -1,5 +1,5 @@
 # ============================================================
-# .github/workflows/ci-hygiene-mkdocs.yml (Continuous Integration)
+# .github/workflows/ci-hygiene.yml (Continuous Integration)
 # ============================================================
 # SOURCE: https://github.com/denisecase/templates
 #
@@ -78,16 +78,4 @@ jobs:
       # ============================================================
 
       - name: B1) validate-pyproject (must be in pyproject.toml deps)
-        run: uv run validate-pyproject pyproject.toml
-
-      # ============================================================
-      # === DEPLOY: Build only, don't deploy yet ===
-      # ============================================================
-
-      - name: D1) Build docs (mkdocs --strict)
-        run: |
-          if [ -f "mkdocs.yml" ] || [ -f "mkdocs.yaml" ]; then
-            uv run mkdocs build --strict --verbose
-          else
-            echo "No mkdocs config found; skipping docs build."
-          fi
+        run: uvx validate-pyproject pyproject.toml

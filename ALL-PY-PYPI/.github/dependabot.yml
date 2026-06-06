@@ -21,4 +21,4 @@ updates:
     schedule:
       interval: "monthly" # ALT: Use "weekly" for higher security when needed
     commit-message:
-      prefix: "(deps)" # WHY: enable filtering by commit type
+      prefix: "(deps)"  # WHY: enable filtering by commit type
