@@ -3,90 +3,58 @@
 # ============================================================
 # Updated: 2026-06-06
 #
-# REQ.UNIVERSAL: All professional GitHub project repositories MUST lint authored Markdown.
-# WHY: Check README and documentation Markdown while ignoring virtual
-# environments, dependency trees, caches, build output, and generated docs.
-# CUSTOM: Add ignores only for generated or external content that should not
-# be linted as authored documentation.
-
-# === Authored Markdown inputs ===
+# WHY: Check authored Markdown while ignoring generated output,
+# dependency directories, virtual environments, caches, and build artifacts.
+# REQ: Markdown lint should check source documentation, not generated docs,
+# dependency trees, coverage output, or runtime artifacts.
 
 globs:
   - "**/*.md"
 
-# === Generated, dependency, cache, and non-source ignores ===
-
 ignores:
-  # WHY: Virtual environments and dependency trees are not authored Markdown.
-  - ".venv/**"
-  - "**/.venv/**"
-  - "node_modules/**"
-  - "**/node_modules/**"
-
-  # WHY: Build and distribution output is generated.
-  - "build/**"
-  - "**/build/**"
-  - "dist/**"
-  - "**/dist/**"
-  - "site/**"
-  - "**/site/**"
-
-  # WHY: Tool caches and coverage output are generated.
-  - ".mypy_cache/**"
   - "**/.mypy_cache/**"
-  - ".nox/**"
   - "**/.nox/**"
-  - ".pytest_cache/**"
   - "**/.pytest_cache/**"
-  - ".pyright/**"
   - "**/.pyright/**"
-  - ".ruff_cache/**"
   - "**/.ruff_cache/**"
-  - ".tox/**"
   - "**/.tox/**"
-  - ".uv-cache/**"
   - "**/.uv-cache/**"
-  - "htmlcov/**"
+  - "**/.venv/**"
+  - "**/build/**"
+  - "**/dist/**"
   - "**/htmlcov/**"
-
-  # WHY: Extensionless repository metadata files are not authored Markdown.
+  - "**/node_modules/**"
+  - "**/site/**"
+  - ".mypy_cache/**"
+  - ".nox/**"
+  - ".pytest_cache/**"
+  - ".pyright/**"
+  - ".ruff_cache/**"
+  - ".tox/**"
+  - ".uv-cache/**"
+  - ".venv/**"
+  - "build/**"
+  - "dist/**"
+  - "htmlcov/**"
   - "LICENSE"
-  - "CODEOWNERS"
-  - ".github/CODEOWNERS"
-  - "**/CODEOWNERS"
-  - "**/.github/CODEOWNERS"
-
-# === Markdown lint defaults ===
+  - "node_modules/**"
+  - "site/**"
 
 config:
-  # WHY: Enable default rules as a stable baseline for authored Markdown.
-  default: true
-
-  # === Line length ===
+  default: true # WHY: Enable default Markdown rules as the project baseline.
 
   MD013:
     line_length: 100
-    # WHY: Long headings can be necessary for clarity and SEO.
-    headings: false
-    # WHY: Long table cells can be necessary for readability and completeness.
-    tables: false
-    # WHY: Long lines in code blocks can be necessary for accurate examples.
-    code_blocks: false
+    headings: false # WHY: Long headings may be needed for clarity.
+    tables: false # WHY: Long table cells may be needed for readability.
+    code_blocks: false # WHY: Long code lines should not be wrapped by Markdown lint.
 
-  # === Document structure ===
-
-  # WHY: Allow multiple top-level headings in README and documentation index files.
-  MD025: false
-
-  # === Inline HTML ===
+  MD025: false # WHY: Allow multiple top-level headings in README/docs/index style files.
 
   MD033:
     allowed_elements:
-      # WHY: Details/summary blocks are useful for collapsible documentation.
-      - details
-      - summary
-      # WHY: Link/meta elements are sometimes needed for documentation metadata.
-      - link
-      - meta
-      # WHY: Mark elements are useful for highlighting.
-      - mark
+      - details # WHY: Details elements support collapsible documentation sections.
+      - link # WHY: Link elements are sometimes needed for metadata or styling.
+      - mark # WHY: Mark elements support intentional highlighting.
+      - meta # WHY: Metadata elements may be needed in generated/static docs.
+      - summary # WHY: Summary elements support collapsible documentation sections.
