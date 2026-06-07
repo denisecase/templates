@@ -1,27 +1,20 @@
 # ============================================================
-# .github/workflows/pre-release.yml (SE Manifest Schema)
+# .github/workflows/pre-release.yml (ALL-PY-PYPI)
 # ============================================================
-# VARIANT: dc-up
-# Updated: 2026-04-30
-
-# WHY-FILE: Pre-release checks and build.
-# REQ: Trigger on version tags like v1.2.3.
+# Updated: 2026-06-06
 #
-# OWNS:
-#   schema validation
-#   SE_MANIFEST.toml validation
-#   artifact integrity checks
+# WHY: Validate tagged Python package artifacts before release.
+# REQ: Reusable by PyPI package repositories.
+# OBS: Generic only; repo-specific artifact checks belong in separate workflows.
 
 name: Pre-Release Checks and Build
 
 on:
-  workflow_call: # WHY: Allow calling from PyPI repos in this org.
+  workflow_call:     # WHY: Allow calling from PyPI repos in this org.
   workflow_dispatch: # WHY: Allow manual trigger for pre-release checks if needed.
 
 permissions: # WHY: Use least privileges required.
-  contents: write   # WHY: Create GitHub Release.
-  pages: write      # WHY: Required to deploy to GitHub Pages.
-  id-token: write   # WHY: PyPI Trusted Publishing (OIDC) + deploy-pages OIDC.
+  contents: read
 
 env:
   PYTHONUNBUFFERED: "1"       # WHY: Real-time logging.
@@ -31,7 +24,6 @@ jobs:
   pre-release:
     runs-on: ubuntu-latest
     timeout-minutes: 30 # WHY: Prevent hanging jobs. If over, it is likely stuck.
-    environment: pypi  # WHY: Use 'pypi' environment for PyPI publishing; ignore warnings.
     env:
       PYTHON_VERSION: "3.14"
 
@@ -46,20 +38,16 @@ jobs:
           fetch-tags: true
           ref: ${{ github.ref }}
 
-      - name: A2) Configure GitHub Pages
-        # WHY: Sets Pages metadata for deployments.
-        uses: actions/configure-pages@v6
-
-      - name: A3) Install uv (with caching and uv.lock awareness)
+      - name: A2) Install uv
         uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
 
-      - name: A4) Install Python ${{ env.PYTHON_VERSION }}
+      - name: A3) Install Python ${{ env.PYTHON_VERSION }}
         run: uv python install ${{ env.PYTHON_VERSION }}
 
-      - name: A5) Display versions
+      - name: A4) Display versions
         run: |
           uv --version
           uv run python --version
@@ -100,36 +88,8 @@ jobs:
           fi
           echo "Artifact version matches tag."
 
-      - name: B5) Confirm wheel contains runtime schema artifact
-        shell: bash
-        run: |
-          set -e
-          python - <<'PY'
-          import pathlib
-          import zipfile
+      - name: B5) Sync all dependencies with locked versions
+        run: uv sync --extra dev --extra docs --locked
 
-          wheels = list(pathlib.Path("dist").glob("*.whl"))
-          assert wheels, "No wheel found"
-
-          wheel = wheels[-1]
-          names = zipfile.ZipFile(wheel).namelist()
-          matches = [name for name in names if name.endswith("manifest-schema.toml")]
-
-          print(matches)
-
-          assert (
-              "dc_up/manifest-schema.toml" in names
-          ), "Wheel is missing dc_up/manifest-schema.toml"
-          PY
-
-      - name: B6) Sync dependencies after build
-        run: uv sync --extra dev --extra docs --upgrade
-
-      # ============================================================
-      # E) Execute local cli commands for additional checks
-      # ============================================================
-      - name: E1) Validate schema internal consistency
-        run: uv run se-manifest validate-schema --strict
-
-      - name: E2) Validate repository manifest against schema
-        run: uv run se-manifest validate-manifest --strict
+      - name: B6) Validate built artifacts
+        run: uvx twine check dist/*
