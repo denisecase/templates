@@ -17,52 +17,49 @@ Again, follow the instructions above to complete:
 1. Phase 4. **Make a Technical Modification** - make a change and verify it still runs
 2. Phase 5. **Apply the Skills to a New Problem**
 
-## Phase 4 Suggestions
+### More About Phase 4
 
-Make a small technical change that does not break the project.
+Follow the instructions in
+[⭐ **Workflow: Apply Example**](https://denisecase.github.io/pro-analytics-02/workflow-b-apply-example-project/)
+to complete **Phase 4** and make a small
+change without breaking anything.
 
-Choose one suggestion from the local project materials,
-or make a different technical modification that fits the project.
+Your technical modification should be small, observable, and easy to explain.
 
-For more ideas, see [Phase 4 Suggestions](./phase4-suggestions.md).
+## More About Phase 5
 
-Confirm the project still runs successfully after your change.
+Follow the instructions linked above to complete **Phase 5**
+and apply the techniques to solve a novel problem.
 
-## Phase 5 Suggestions
-
-Implement a new project based on the example.
-Apply the skills to solve a novel problem.
-
-For more ideas, see [Phase 5 Suggestions](./phase5-suggestions.md).
+Implement a custom project based on the example.
 
 Keep the working example and your custom code in the repository
 together until your work has been assessed.
 
-Once assessed, you may remove the working example and
+After your work has been assessed, you may remove the working example and
 tailor your custom project as you like.
 
 ## Professional Communication
 
 Make sure the title and narrative reflect your work.
 
-Verify key documentation files:
+Update key documentation files:
 
-- README.md - update this to present your work
-- docs/ (source and hosted on GitHub Pages)
-- docs/index.md - include a short summary of your Phase 4 and Phase 5 customizations
+- Update README.md - to include **your commands, process, results**
+- Update docs/index.md - describe your Phase 4 and Phase 5 customizations, skills, and insights.
 
-Verify code files, either (or rarely, both):
+Update and verify your code files, either (or rarely, both):
 
-- src/  - your modules, named with your alias, as appropriate
-- notebooks/ - your notebooks, named with your alias, as appropriate
+- src/  - your modules, **named with your alias**, as appropriate
+- notebooks/ - your notebooks, **named with your alias**, as appropriate
 
-Verify data files, as appropriate:
+Update and present your data files, as appropriate to the project:
 
 - `data/raw/` - source inputs
 - `data/processed/` - processed data exports, if the project creates any
 - `artifacts/` - generated database files, logs, reports, or other outputs
 
-## Portfolio Entry
+## Portfolio Presentation
 
 Ensure your project clearly demonstrates:
 
@@ -71,3 +68,4 @@ Ensure your project clearly demonstrates:
 - understanding of your chosen domain
 - accessible narrative
 - appropriate images, tables, logs, or output conveying your work
+- a GitHub repo **About** section with a link to **your GitHub Pages site**
