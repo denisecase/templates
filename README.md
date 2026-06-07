@@ -1,7 +1,7 @@
 # Templates
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/MIT)
-![Build Status](https://github.com/denisecase/templates/actions/workflows/ci-hygiene-mkdocs.yml/badge.svg?branch=main)
+[![CI Hygiene](https://github.com/denisecase/templates/actions/workflows/ci-hygiene.yml/badge.svg?branch=main)](https://github.com/denisecase/templates/actions/workflows/ci-hygiene.yml)
 [![Check Links](https://github.com/denisecase/templates/actions/workflows/links.yml/badge.svg?branch=main)](https://github.com/denisecase/templates/actions/workflows/links.yml)
 [![Dependabot](https://img.shields.io/badge/Dependabot-enabled-brightgreen.svg)](https://github.com/denisecase/templates/security/)
 

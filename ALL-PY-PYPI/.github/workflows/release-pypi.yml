@@ -1,15 +1,19 @@
 # ============================================================
-# .github/workflows/release-pypi.yml (ALL-PY-PYPI)
+# .github/workflows/release-pypi.yml
 # ============================================================
 # Updated: 2026-06-06
-
+#
 # WHY: Publish a tagged Python package release to PyPI.
 # REQ: Trigger ONLY on version tags like v1.2.3.
 # REQ: PyPI project must be configured for Trusted Publishing (OIDC).
-# REQ: uv build must run from a clean tagged checkout.
-# OBS: Documentation deployment is handled separately by deploy-zensical.yml.
+# REQ: pre-release.yml must build, validate, and upload the dist artifact.
+#
+# OBS: Two jobs, deliberately separated:
+#      1) pre-release - validates and builds the dist once.
+#      2) publish     - downloads that exact dist, creates the GitHub Release,
+#                       and publishes to PyPI. No rebuild, no re-check.
 
-name: Release (PyPI + Zensical docs)
+name: Release (PyPI)
 
 on:
   push:
@@ -17,9 +21,7 @@ on:
       - "v*.*.*"
 
 permissions:
-  contents: write   # WHY: Create GitHub Release.
-  pages: write      # WHY: Required to deploy to GitHub Pages.
-  id-token: write   # WHY: PyPI Trusted Publishing (OIDC) + deploy-pages OIDC.
+  contents: read # WHY: Workflow default is read-only; jobs elevate as needed.
 
 env:
   PYTHONUNBUFFERED: "1"       # WHY: Real-time logging.
@@ -27,68 +29,48 @@ env:
 
 concurrency:
   group: release-${{ github.ref }}
-  cancel-in-progress: false  # WHY: Never cancel a release in progress.
+  cancel-in-progress: false
+  # WHY: Serialize releases per tag and never cancel a release in progress.
 
 jobs:
 
+  # ------------------------------------------------------------
+  # 1) Validate and build once. Produces the `dist` artifact.
+  # ------------------------------------------------------------
   pre-release:
     uses: ./.github/workflows/pre-release.yml
 
-  build-and-release:
-    needs: pre-release  # WHY: Never publish if pre-release checks fail.
+  # ------------------------------------------------------------
+  # 2) Publish the exact artifact that pre-release built and checked.
+  # ------------------------------------------------------------
+  publish:
+    needs: pre-release    # WHY: Never publish if pre-release checks fail.
     runs-on: ubuntu-latest
-    timeout-minutes: 30 # WHY: Prevent hanging jobs. If over, it is likely stuck.
-    environment: pypi  # WHY: Use 'pypi' environment for PyPI publishing; ignore warnings.
-    env:
-      PYTHON_VERSION: "3.14"
+    timeout-minutes: 30   # WHY: Prevent hanging jobs. If over, it is likely stuck.
+    environment: pypi     # WHY: PyPI Trusted Publishing environment.
+    permissions:
+      contents: write     # WHY: Create the GitHub Release.
+      id-token: write     # WHY: PyPI Trusted Publishing (OIDC).
 
     steps:
-
-      # === ASSEMBLE ===
-
-      - name: A1) Checkout repository with full history and tags
+      - name: A1) Checkout repository
         uses: actions/checkout@v6
+        # WHY: Provides git/repo context for the release step.
+        # OBS: No deep history needed here; the artifact is downloaded, not rebuilt.
+
+      - name: A2) Download the built distribution
+        uses: actions/download-artifact@v8
+        # OBS: Major must match the upload-artifact major in pre-release.yml.
         with:
-          fetch-depth: 0   # WHY: hatch-vcs needs full history to derive version from tags.
-          fetch-tags: true
-          ref: ${{ github.ref }}
+          name: dist
+          path: dist
 
-      - name: A2) Install uv (with caching and uv.lock awareness)
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-
-      - name: A3) Install Python ${{ env.PYTHON_VERSION }}
-        run: uv python install ${{ env.PYTHON_VERSION }}
-
-      - name: A4) Display versions
-        run: |
-          uv --version
-          uv run python --version
-
-      # === BASELINE CHECKS (build while git is pristine) ===
-
-      - name: B1) Extract plain version from tag (no leading 'v')
+      - name: A3) Extract plain version from tag
         id: ver
         shell: bash
         run: echo "plain=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
 
-      - name: B2) Verify git is clean before build
-        run: |
-          echo "Git status:"
-          git status --short
-          echo "Git describe:"
-          git describe --tags --always --dirty
-          if [[ $(git status --porcelain) ]]; then
-            echo "ERROR: Git tree is dirty before build!"
-            exit 1
-          fi
-
-      - name: B3) Build sdist + wheel
-        run: uv build
-
-      - name: B4) Ensure built artifact version matches tag
+      - name: A4) Verify downloaded artifact version matches tag
         shell: bash
         run: |
           set -e
@@ -96,14 +78,14 @@ jobs:
           echo "Tag version: $TAG"
           ls dist
           if ! ls dist/*"$TAG"*.whl dist/*"$TAG"*.tar.gz >/dev/null 2>&1; then
-            echo "ERROR: Built artifact version does not match tag $TAG"
+            echo "ERROR: Downloaded artifact version does not match tag $TAG"
             exit 1
           fi
           echo "Artifact version matches tag."
 
-      # === CREATE RELEASE ===
+      # === RELEASE AND PUBLISH ===
 
-      - name: C1) Create GitHub Release and upload artifacts
+      - name: B1) Create GitHub Release and upload artifacts
         uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.ref_name }}
@@ -116,5 +98,6 @@ jobs:
           prerelease: false
           make_latest: true
 
-      - name: C2) Publish to PyPI (Trusted Publishing)
+      - name: B2) Publish to PyPI with Trusted Publishing
         uses: pypa/gh-action-pypi-publish@release/v1
+        # OBS: Uploads dist/* by default; the downloaded artifact lands in dist/.

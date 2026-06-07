@@ -93,3 +93,9 @@ jobs:
 
       - name: B6) Validate built artifacts
         run: uvx twine check dist/*
+
+      - name: B7) Upload built distribution artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist/*
