@@ -1,12 +1,15 @@
 # ============================================================
 # .markdownlint-cli2.yaml (ALL)
 # ============================================================
-# Updated: 2026-06-06
+# Updated: 2026-06-08
 #
 # WHY: Check authored Markdown while ignoring generated output,
 # dependency directories, virtual environments, caches, and build artifacts.
 # REQ: Markdown lint should check source documentation, not generated docs,
 # dependency trees, coverage output, or runtime artifacts.
+#
+# Run with:
+# npx markdownlint-cli2 --fix
 
 globs:
   - "**/*.md"
@@ -25,6 +28,7 @@ ignores:
   - "**/htmlcov/**"
   - "**/node_modules/**"
   - "**/site/**"
+  - ".github/CODEOWNERS"
   - ".mypy_cache/**"
   - ".nox/**"
   - ".pytest_cache/**"
