@@ -12,7 +12,7 @@
 site_name = "Docs" # CUSTOM: Tab name of the documentation site.
 site_url = "{{ site_url }}"
 repo_url = "{{ repo_url }}"
-repo_name = "{{ repo_full_name }}"
+repo_name = "{{ repo_name }}"
 site_description = "Project Documentation" # CUSTOM: Description of the documentation site.
 docs_dir = "docs" # source directory for documentation markdown files
 site_dir = "site" # output directory for generated site (ignored by Git; not in repo)
