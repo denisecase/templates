@@ -19,8 +19,8 @@ also override earlier files when the same filename has a different contract.
 | `ALL-PY`            | Any repository with Python tooling or scripts   | Ruff and Python pre-commit configuration                                            |
 | `ALL-PY-SRC`        | Python repositories with a `src/` package       | Pyright and package/docs CI                                                         |
 | `ALL-PY-SRC-PYPI`   | Publishable Python packages                     | PyPI release workflows                                                              |
-| `ALL-COURSE`        | Course repositories                             | Course-specific ignores and student-safe defaults                                   |
-| `ALL-COURSE-PY-SRC` | Course repositories with Python source packages | Student-facing docs, API docs, and course docs config                               |
+| `ALL-COURSE`        | Course repositories                             | Course-specific ignores and safe defaults                                           |
+| `ALL-COURSE-PY-SRC` | Course repositories with Python source packages | Standard course docs, API docs, and course docs config                              |
 | `ALL-TS`            | TypeScript repositories                         | TypeScript-specific pre-commit configuration                                        |
 
 ## Enforcement Model
@@ -30,7 +30,7 @@ Not every baseline check is enforced the same way in every repository.
 Research, package, and infrastructure repositories may use stricter commit-time
 automation.
 Course repositories may keep some checks available as explicit
-commands instead of making them student pre-commit gates.
+commands instead of making them pre-commit gates.
 
 This keeps the baseline shared while allowing enforcement
 to differ by repository purpose.
@@ -88,41 +88,14 @@ differ by layer.
 
 ## Ruff Policy
 
-Use Ruff as the student-safe Python floor.
-Keep default rule families:
-
-```text
-E, F, W
-```
-
-Reason:
-`F` catches real bugs;
-`E` and `W` support basic correctness and consistency.
-
-Avoid more opinionated rule families such as:
-
-```text
-B, SIM, ANN
-```
-
-Reason: those are useful for stricter package or research work,
-but may be too burdensome for a shared student baseline.
-
-Use:
-
-```shell
-ruff check --fix --exit-non-zero-on-fix
-ruff format
-```
-
-Reason: safe fixes are applied, but the command still reports that files changed.
+Use Ruff as the safe Python floor.
 
 ## Versioning Policy
 
 These repositories are not production deployment targets.
-
 Use normal `pre-commit` pinned `rev:` values because that is how `pre-commit`
-works, but do not treat them as permanent pins.
+works, and do not treat them as permanent pins.
+WHY: exact long-term pinning creates maintenance burden and security lag.
 
 Update with:
 
@@ -130,29 +103,17 @@ Update with:
 pre-commit autoupdate
 ```
 
-Reason: exact long-term pinning creates maintenance burden and security lag.
-
 ## Run Policy
 
-`pre-commit` carries the shared commit-time checks for repositories that use the
-full pre-commit gate.
-
-Run all configured pre-commit hooks with:
-
-```shell
-uvx pre-commit run --all-files
-```
-
-Run Markdown linting directly with:
-
-```shell
-npx markdownlint-cli2 --fix
-```
-
-Course repositories may document Markdown linting as a manual command rather than
+`pre-commit` carries the shared commit-time checks
+for repositories that use the full pre-commit gate.
+Course repositories may document Markdown linting
+as a manual command rather than
 installing it as a pre-commit hook.
 
 ## Template Layer Application
+
+This is an example, and can be expected to evolve.
 
 | Layer               | Files                                                                                                                                                                                                                 | Purpose                                                                                                                                 |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
@@ -168,6 +129,10 @@ installing it as a pre-commit hook.
 
 Later layers may override earlier files only when the same filename has a
 different contract.
+WHY: course repositories and package repositories have different generated
+files, docs navigation, and student-facing surfaces.
+
+Do not duplicate files downstream when the shared `ALL` version is correct.
 
 Valid examples:
 
@@ -176,25 +141,15 @@ ALL/.gitignore -> ALL-COURSE/.gitignore
 ALL-PY-SRC/zensical.toml.template -> ALL-COURSE-PY-SRC/zensical.toml.template
 ```
 
-Reason: course repositories and package repositories have different generated
-files, docs navigation, and student-facing surfaces.
-
-Do not duplicate files downstream when the shared `ALL` version is correct.
-
 ## Course Repository Policy
 
-Course repositories should stay student-safe.
-
+Course repositories should stay safe.
 They may use the same shared config files as research and package repositories,
 but should avoid unnecessary commit-time friction.
-
 In course repositories:
 
-- keep Markdown linting available through `npx markdownlint-cli2 --fix`;
-- avoid making Markdown line wrapping a surprise student blocker;
-- keep Ruff to the safe floor;
-- avoid strict optional rule families unless the course explicitly teaches them;
+- keep Markdown linting available outside pre-commit;
+- avoid making Markdown line wrapping too severe;
+- keep Ruff as a safe floor;
+- avoid strict optional rule families unless the course teaches them;
 - keep generated outputs and personalized student files ignored.
-
-The goal is not to remove standards. The goal is to put standards at the right
-enforcement point.

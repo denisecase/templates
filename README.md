@@ -81,6 +81,7 @@ uv lock --upgrade
 uv sync --extra dev --extra docs --upgrade
 
 uvx pre-commit install
+uvx pre-commit autoupdate
 
 git add -A
 uvx pre-commit run --all-files
