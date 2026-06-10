@@ -65,6 +65,8 @@ uvx pre-commit run --all-files
 # repeat if changes were made
 uvx pre-commit run --all-files
 
+npx markdownlint-cli2 --fix
+
 # save progress
 git add -A
 git commit -m "update"
