@@ -5,47 +5,24 @@
 [![Check Links](https://github.com/denisecase/templates/actions/workflows/links.yml/badge.svg?branch=main)](https://github.com/denisecase/templates/actions/workflows/links.yml)
 [![Dependabot](https://img.shields.io/badge/Dependabot-enabled-brightgreen.svg)](https://github.com/denisecase/templates/security/)
 
-> Canonical baseline files for Denise Case repositories.
+> Canonical baseline files for my repositories.
 
 This repository stores reusable project files, configuration files, workflow files,
 and documentation scaffolding for professional course, tooling, and software
 engineering repositories.
 
-The template layers are intentionally additive. Later layers override earlier
+The template layers are additive. Later layers override earlier
 layers when a repository profile needs a more specific version of the same file.
 
 ## Layers
 
-Common layers include:
+Common additive layers include:
 
 ```text
 ALL
 ALL-PY
 ALL-PY-SRC
 ALL-PY-SRC-PYPI
-ALL-PY-NB
-ALL-PY-KAFKA
-ALL-TS
-ALL-TS-VSCODE
-```
-
-Typical compositions:
-
-```text
-General Python source repos:
-  ALL -> ALL-PY -> ALL-PY-SRC
-
-Notebook repos:
-  ALL -> ALL-PY -> ALL-PY-NB
-
-Kafka repos:
-  ALL -> ALL-PY -> ALL-PY-KAFKA
-
-Published Python packages:
-  ALL -> ALL-PY -> ALL-PY-SRC -> ALL-PY-SRC-PYPI
-
-Templates repo tooling:
-  ALL -> ALL-PY
 ```
 
 ## Requirements
@@ -99,10 +76,6 @@ git push -u origin main
 ## Annotations
 
 [.annotations/annotations.md](./.annotations/annotations.md)
-
-## Authority Manifest
-
-[.accountability/surfaces.toml](./.accountability/surfaces.toml)
 
 ## Citation
 
