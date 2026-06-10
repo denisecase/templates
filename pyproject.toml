@@ -1,7 +1,7 @@
 # ============================================================
 # pyproject.toml (ALL-PY)
 # ============================================================
-
+# Updated: 2026-06-10
 # REQ.PYTHON: Python projects SHOULD include pyproject.toml as the single source of truth.
 # WHY: Centralizes Python tooling configuration even when the repo is not a package.
 
@@ -25,6 +25,6 @@ docs = []
 # ============================================================
 
 [tool.uv]
-# REQ.UV: Disable package mode for tooling-only repositories.
+# REQ: Disable package mode for tooling-only repositories.
 # WHY: This repository is not intended to be built or published as a Python package.
 package = false

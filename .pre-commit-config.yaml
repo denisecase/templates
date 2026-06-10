@@ -39,6 +39,9 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
+
+      # === Almost all repositories ===
+
       - id: trailing-whitespace
         name: A1) Clean trailing whitespace
         args: [--markdown-linebreak-ext=md]
@@ -50,6 +53,8 @@ repos:
         name: A3) Normalize line endings to LF before checks
         args: [--fix=lf]
 
+      # === Basic data checks ===
+
       - id: check-json
         name: B1) Validate JSON syntax
         exclude: ^\.vscode/.*\.json$
@@ -60,6 +65,8 @@ repos:
       - id: check-yaml
         name: B3) Validate YAML syntax
         files: \.(yml|yaml)$
+
+      # === Check for safety issues ===
 
       - id: check-added-large-files
         name: C1) Prevent accidental commits of large binaries

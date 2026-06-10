@@ -1,7 +1,7 @@
 # ============================================================
-# .gitignore (ALL)
+# .gitignore (ALL-COURSE-REPOS)
 # ============================================================
-# Updated: 2026-06-06
+# Updated: 2026-06-10
 #
 # REQ: All professional GitHub project repositories MUST include .gitignore.
 # WHY: Keep generated artifacts, local state, secrets, and OS-specific files
@@ -9,6 +9,13 @@
 # ALT: Repository may customize ignores, but MUST preserve universal safety rules.
 # CUSTOM: Logs may be committed for verification; keep ignored for
 # production use and security.
+
+# === Logs and generated runtime output (COURSE-REPOS) ===
+
+# WHY: Logs are useful during debugging and verification.
+# ALT: Comment when logs must be inspected or validated.
+# *.log  # CUSTOM: Course logs are pushed for verification
+logs/
 
 
 # === Private notes and local-only files ===
@@ -179,11 +186,3 @@ __pycache__/
 
 # WHY: Notebook checkpoint state is generated.
 .ipynb_checkpoints/
-
-
-# === Logs and generated runtime output ===
-
-# WHY: Logs are useful during debugging and verification.
-# ALT: Comment when logs must be inspected or validated.
-*.log
-logs/

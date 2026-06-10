@@ -22,7 +22,7 @@ Common layers include:
 ALL
 ALL-PY
 ALL-PY-SRC
-ALL-PY-PYPI
+ALL-PY-SRC-PYPI
 ALL-PY-NB
 ALL-PY-KAFKA
 ALL-TS
@@ -42,7 +42,7 @@ Kafka repos:
   ALL -> ALL-PY -> ALL-PY-KAFKA
 
 Published Python packages:
-  ALL -> ALL-PY -> ALL-PY-SRC -> ALL-PY-PYPI
+  ALL -> ALL-PY -> ALL-PY-SRC -> ALL-PY-SRC-PYPI
 
 Templates repo tooling:
   ALL -> ALL-PY

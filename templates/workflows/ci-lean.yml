@@ -3,7 +3,7 @@
 # ============================================================
 # SOURCE: https://github.com/denisecase/templates
 #
-# WHY-FILE: Lean deliverables are proofs; broken proofs must not merge.
+# WHY: Lean deliverables are proofs; broken proofs must not merge.
 # REQ: Any check that can be run locally MUST be available locally via pre-commit.
 # REQ: CI MUST NOT introduce arbitrary rules that are not reproducible locally.
 

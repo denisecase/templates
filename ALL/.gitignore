@@ -1,5 +1,5 @@
 # ============================================================
-# .gitignore (ALL)
+# .gitignore (ALL-REPOS)
 # ============================================================
 # Updated: 2026-06-06
 #
@@ -7,8 +7,15 @@
 # WHY: Keep generated artifacts, local state, secrets, and OS-specific files
 # out of the repository.
 # ALT: Repository may customize ignores, but MUST preserve universal safety rules.
-# CUSTOM: Logs may be temporarily committed for verification; keep ignored for
+# CUSTOM: Logs may be committed for verification; keep ignored for
 # production use and security.
+
+# === Logs and generated runtime output ===
+
+# WHY: Logs are useful during debugging and verification.
+# ALT: Comment when logs must be inspected or validated.
+*.log
+logs/
 
 
 # === Private notes and local-only files ===
@@ -49,15 +56,15 @@ ehthumbs.db
 
 # === VS Code ===
 
-# WHY: Ignore editor state while allowing a shared baseline configuration.
-.vscode/
-
-# WHY: Commit shared VS Code project files for consistent extension development.
-# NOTE: Share project configuration, not personal editor state or preferences.
+# WHY: Ignore editor state by default; share only project-level config.
+# NOTE: Use .vscode/* (contents), not .vscode/ (directory). Git will not
+#       re-include a file whose parent directory is excluded.
+.vscode/*
 !.vscode/extensions.json
-!.vscode/launch.json
 !.vscode/settings.json
+!.vscode/launch.json
 !.vscode/tasks.json
+!.vscode/*.code-snippets
 
 
 # === Temporary and swap files ===
@@ -179,11 +186,3 @@ __pycache__/
 
 # WHY: Notebook checkpoint state is generated.
 .ipynb_checkpoints/
-
-
-# === Logs and generated runtime output ===
-
-# WHY: Logs are useful during debugging and verification.
-# ALT: Comment if logs must be inspected or validated.
-*.log
-logs/

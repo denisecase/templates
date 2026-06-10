@@ -1,7 +1,7 @@
 # ============================================================
-# .markdownlint-cli2.yaml (ALL)
+# .markdownlint-cli2.yaml (ALL-REPOS)
 # ============================================================
-# Updated: 2026-06-08
+# Updated: 2026-06-10
 #
 # WHY: Check authored Markdown while ignoring generated output,
 # dependency directories, virtual environments, caches, and build artifacts.
@@ -48,7 +48,7 @@ config:
   default: true # WHY: Enable default Markdown rules as the project baseline.
 
   MD013:
-    line_length: 100
+    line_length: 100 # WHY: Keep authored prose readable in source and diffs.
     headings: false # WHY: Long headings may be needed for clarity.
     tables: false # WHY: Long table cells may be needed for readability.
     code_blocks: false # WHY: Long code lines should not be wrapped by Markdown lint.

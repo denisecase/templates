@@ -3,7 +3,7 @@
 # ============================================================
 # SOURCE: https://github.com/denisecase/templates
 #
-# WHY-FILE: Build and deploy Vue Vite app to GitHub Pages on pushes to main.
+# WHY: Build and deploy Vue Vite app to GitHub Pages on pushes to main.
 # REQ: Repo Settings -> Pages -> Build and deployment -> Source:
 #      GitHub Actions
 

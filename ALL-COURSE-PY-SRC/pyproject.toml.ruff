@@ -1,0 +1,94 @@
+# TODO ADD THIS TO pyproject.toml in the tools section
+
+# === RUFF: STUDENT REPOSITORIES ===
+
+[tool.ruff]
+# WHY: Use one fast tool for Python linting and formatting.
+# WHY: Keep generated, cached, virtualenv, build, and docs-site output out of lint scope.
+exclude = [
+    ".eggs",
+    "*.egg-info",
+    ".ruff_cache",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "site",
+]
+
+# WHY: Match Black/Ruff formatter default; reasonable for readable source and diffs.
+line-length = 88
+
+# WHY: Avoid preview behavior in course repos; students should get stable diagnostics.
+preview = false
+
+# WHY: Match the course Python target so modernization rules do not suggest older patterns.
+target-version = "py314"
+
+# WHY: Do not apply fixes Ruff marks unsafe; student repos should avoid surprising rewrites.
+unsafe-fixes = false
+
+
+[tool.ruff.format]
+# WHY: Spaces are the Python standard and match formatter defaults.
+indent-style = "space"
+
+# WHY: Preserve platform-appropriate line endings instead of forcing surprises on Windows users.
+line-ending = "auto"
+
+# WHY: Preserve existing quote style to avoid noisy churn in student submissions.
+quote-style = "preserve"
+
+
+[tool.ruff.lint]
+# WHY: Student-safe professional baseline.
+# WHY: Stricter than Ruff defaults, but still teachable and fixable.
+# WHY: Avoid advanced typing/architecture rules; focus on correctness, clarity, docs, and security.
+select = [
+    "E",   # WHY: Basic syntax and structural correctness.
+    "F",   # WHY: Undefined names, unused imports, and likely real errors.
+    "W",   # WHY: Warnings that catch easy issues early.
+    "I",   # WHY: Deterministic import ordering; low-friction and autofixable.
+    "UP",  # WHY: Modern Python constructs for the pinned Python version.
+    "B",   # WHY: Common bug patterns worth catching early.
+
+    "PTH", # WHY: Enforce pathlib because it is the course/repo path standard.
+    "C4",  # WHY: Cleaner comprehensions; usually simple, teachable fixes.
+    "SIM", # WHY: Simplify obvious unnecessary complexity.
+    "RET", # WHY: Encourage clear return flow.
+
+    "D",   # WHY: Teach documentation habits for reusable code.
+    "S",   # WHY: Catch obvious security hazards in examples and tooling code.
+]
+
+ignore = [
+    "E501", # WHY: Line length is handled by the formatter, not Ruff lint.
+    "D203", # WHY: Conflicts with D211; use the no-blank-line convention.
+    "D213", # WHY: Conflicts with D212; use first-line summary convention.
+]
+
+
+[tool.ruff.lint.isort]
+# WHY: Keep imports deterministic and readable within sections.
+force-sort-within-sections = true
+
+
+[tool.ruff.lint.per-file-ignores]
+# WHY: Package exports are allowed to import names for public API exposure.
+"src/**/__init__.py" = ["F401"]
+
+# WHY: Generated/version files are tooling artifacts, not authored teaching examples.
+"src/**/_version.py" = ["ALL"]
+
+# WHY: Tests prioritize clear behavior checks over public API documentation.
+# WHY: Plain assert is standard pytest practice.
+# WHY: B011/B018 can be noisy in small instructional tests and examples.
+"tests/**/*.py" = ["D", "B018", "B011", "S101"]
+
+# WHY: Marker files are intentionally empty/non-Python content.
+"src/**/py.typed" = ["ALL"]
+
+
+[tool.ruff.lint.pydocstyle]
+# WHY: Google style is readable for students and consistent across course docs/examples.
+convention = "google"
