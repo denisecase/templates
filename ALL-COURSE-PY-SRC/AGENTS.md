@@ -56,6 +56,8 @@ Lint / format:
 ```shell
 uv run ruff format .
 uv run ruff check . --fix
+uv run python -m pyright
+uv run python -m pytest
 ```
 
 Build documentation:
