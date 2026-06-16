@@ -1,8 +1,11 @@
 # Project Instructions
 
+We follow a common workflow.
+The first few times, it feels like a lot, but it gets better.
+
 ## WEDNESDAY: Complete Workflow Phases 1-3
 
-Follow the instructions in
+Follow
 [⭐ **Workflow: Apply Example**](https://denisecase.github.io/pro-analytics-02/workflow-b-apply-example-project/)
 to complete:
 
@@ -12,60 +15,47 @@ to complete:
 
 ## FRIDAY/SUNDAY: Complete Workflow Phases 4-5
 
-Again, follow the instructions above to complete:
+Continue with the same guide to complete:
 
-1. Phase 4. **Make a Technical Modification** - make a change and verify it still runs
-2. Phase 5. **Apply the Skills to a New Problem**
-
-### More About Phase 4
-
-Follow the instructions in
-[⭐ **Workflow: Apply Example**](https://denisecase.github.io/pro-analytics-02/workflow-b-apply-example-project/)
-to complete **Phase 4** and make a small
-change without breaking anything.
-
-Your technical modification should be small, observable, and easy to explain.
-
-## More About Phase 5
-
-Follow the instructions linked above to complete **Phase 5**
-and apply the techniques to solve a novel problem.
-
-Implement a custom project based on the example.
-
-Keep the working example and your custom code in the repository
-together until your work has been assessed.
-
-After your work has been assessed, you may remove the working example and
-tailor your custom project as you like.
+1. Phase 4. **Make a Technical Modification** - make one small,
+   observable, explainable change and keep the project running.
+2. Phase 5. **Apply the Skills to a New Problem** - implement
+   a custom project based on the example; see [your-files.md](your-files.md) for naming.
 
 ## Professional Communication
 
-Make sure the title and narrative reflect your work.
+### Code & Data Files (As Used in This Project)
 
-Update key documentation files:
+- `src/` — modules **named with your alias**
+- `notebooks/` — notebooks **named with your alias**
+- `data/raw/` — source inputs
+- `data/processed/` — processed exports, if any
+- `artifacts/` — database files, logs, reports, or other outputs
 
-- Update README.md - to include **your commands, process, results**
-- Update docs/index.md - describe your Phase 4 and Phase 5 customizations, skills, and insights.
+### README.md
 
-Update and verify your code files, either (or rarely, both):
+Update the **project landing page** to describe your work:
+badges, tagline, project description, run commands, links to key artifacts, any visuals.
 
-- src/  - your modules, **named with your alias**, as appropriate
-- notebooks/ - your notebooks, **named with your alias**, as appropriate
+### docs/index.md
 
-Update and present your data files, as appropriate to the project:
+Your **analytics write-up** - the introduction, data description,
+objective & process, results & insights, future work,
+and the techniques you applied
+(be explicit while in school; later your skills become more implicit).
 
-- `data/raw/` - source inputs
-- `data/processed/` - processed data exports, if the project creates any
-- `artifacts/` - generated database files, logs, reports, or other outputs
+### GitHub About
 
-## Portfolio Presentation
+Set the **About** section with a link to **your GitHub Pages site**.
+Check the box.
+The workflow includes how to set the repo Pages to GitHub Actions.
+Pushing to GitHub automagically triggers an action to deploy the docs.
 
-Ensure your project clearly demonstrates:
+## Portfolio Checklist
 
-- a working project
-- meaningful insights with logged results
-- understanding of your chosen domain
-- accessible narrative
-- appropriate images, tables, logs, or output conveying your work
-- a GitHub repo **About** section with a link to **your GitHub Pages site**
+- [ ] Working project
+- [ ] Meaningful insights with logged results
+- [ ] Understanding of your chosen domain
+- [ ] Accessible narrative
+- [ ] Images, tables, logs, or output conveying your work
+- [ ] GitHub About section linking to your GitHub Pages site

@@ -46,16 +46,18 @@ The exact package name and script name depend on the project.
 
 Example data files are typically found in `data/raw/`.
 
-When the project asks you to customize data files,
-copy the example data file and rename the copy using your alias.
+Many data source names will not be customized.
+Sometimes, it may be useful to copy the example data file
+(e.g. if named \_case)
+and rename the copy using your alias.
 
-This helps you discover the importance of data paths.
+Renaming files is a great way to discover the importance of data paths.
 
-For assistance, use VS Code search in files to find
+For assistance, use VS Code "search in files" to find
 everywhere that `data/` appears in the project.
 
 Paths are critical and can be hard to get right.
-That is why we log paths, learn how to search for paths, and
+That's why we log paths, learn how to search for paths, and
 declare constants in Python to keep them consistent.
 
 A renaming example might be:
@@ -69,14 +71,11 @@ data/raw/data_stellar_analytics.csv
 
 Keep the original example code and original data files
 so the provided example continues to work.
-
 Modify **your code files** and **your data files**
 as you develop your custom project.
 
 ## Project Requirements
 
 You may choose your own datasets.
-
 For accountability and to earn maximum credit:
-
-> Data and code **filenames** should include **your alias**.
+code **filenames** should include **your alias**.
