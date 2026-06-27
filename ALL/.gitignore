@@ -1,14 +1,13 @@
 # ============================================================
 # .gitignore (ALL-REPOS)
 # ============================================================
-# Updated: 2026-06-06
+# Updated: 2026-06-27
 #
 # REQ: All professional GitHub project repositories MUST include .gitignore.
 # WHY: Keep generated artifacts, local state, secrets, and OS-specific files
 # out of the repository.
 # ALT: Repository may customize ignores, but MUST preserve universal safety rules.
-# CUSTOM: Logs may be committed for verification; keep ignored for
-# production use and security.
+
 
 # === Logs and generated runtime output ===
 
@@ -30,6 +29,10 @@ PRIVATE_NOTES.md
 *.env
 .env
 .env.*
+
+# WHY: Commit .env.example as a template showing which variables to set.
+# Copy this file to .env and customize.
+!.env.example
 
 
 # === Operating-system files ===

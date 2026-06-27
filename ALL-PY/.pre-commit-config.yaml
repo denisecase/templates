@@ -1,7 +1,7 @@
 # ============================================================
-# .pre-commit-config.yaml (ALL-PY)
+# .pre-commit-config.yaml (ALL-PY-REPOS)
 # ============================================================
-# Updated: 2026-06-06
+# Updated: 2026-06-27
 #
 # REQ: Professional Python projects SHOULD include pre-commit checks.
 # WHY: Minimize git diffs, catch common issues early, and support collaboration.
@@ -11,12 +11,19 @@
 #   - .gitattributes (EOL normalization)
 #   - pyproject.toml (Python tool settings)
 #
-# OPTIONAL LOCAL USAGE:
+# OPTIONAL LOCAL USAGE (keep tools updated):
 #   uv self update
 #   uvx pre-commit install
+#   uvx pre-commit autoupdate
+#
+# OPTIONAL LOCAL USAGE (run all hooks on all git-tracked files):
 #   uvx pre-commit run --all-files
+#   The first time, it may indicate errors / fixes,
+#   So just re-run the command (up arrow) and it often goes all green.
 #
 # NOTE: Enabling pre-commit is optional. It is not needed to clone or commit.
+# You can skip it with the --no-verify option, e.g.:
+#   git commit -m "your message" --no-verify
 #
 # RUFF ORDER:
 #   Pre-commit runs lint first, then format.

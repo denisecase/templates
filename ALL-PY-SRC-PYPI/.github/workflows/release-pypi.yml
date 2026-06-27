@@ -54,7 +54,7 @@ jobs:
 
     steps:
       - name: A1) Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         # WHY: Provides git/repo context for the release step.
         # OBS: No deep history needed here; the artifact is downloaded, not rebuilt.
 

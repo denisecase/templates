@@ -1,0 +1,9 @@
+{
+  "include": ["src", "tests"],
+  "extraPaths": ["src"],
+  "exclude": ["**/node_modules", "**/.*", ".venv", "**/__pycache__", "dist", "build"],
+  "pythonVersion": "3.14",
+  "reportMissingTypeStubs": "none",
+  "reportPrivateUsage": "none",
+  "typeCheckingMode": "strict"
+}

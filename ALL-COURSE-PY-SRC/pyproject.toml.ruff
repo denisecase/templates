@@ -1,10 +1,41 @@
 # TODO ADD THIS TO pyproject.toml in the tools section
 
-# === RUFF: STUDENT REPOSITORIES ===
+# === PYRIGHT: COURSE REPOSITORIES ===
+
+[tool.pyright]
+# WHY: "basic" catches bugs such as undefined names, bad imports, obvious
+# mismatches without being too demanding.
+typeCheckingMode = "basic"
+
+# WHY: Check package source and tests, nothing else.
+include = ["src", "tests"]
+
+# WHY: Resolve import package from src/ even before an editable install,
+# so a src layout doesn't produce a false "import could not be resolved".
+extraPaths = ["src"]
+
+# WHY: Keep known folders that are generated, cached, virtualenv,
+# build, and documentation site output out of type-check scope.
+# Same as Ruff exclude list.
+exclude = [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/.*",
+    ".venv",
+    "build",
+    "dist",
+    "site",
+    "*.egg-info",
+]
+
+# WHY: Match the course Python target so version-specific inference is correct.
+pythonVersion = "3.14"
+
+# === RUFF: COURSE REPOSITORIES ===
 
 [tool.ruff]
 # WHY: Use one fast tool for Python linting and formatting.
-# WHY: Keep generated, cached, virtualenv, build, and docs-site output out of lint scope.
+# WHY: Keep generated, cached, virtualenv, build, and site/ out of lint scope.
 exclude = [
     ".eggs",
     "*.egg-info",
@@ -16,16 +47,17 @@ exclude = [
     "site",
 ]
 
-# WHY: Match Black/Ruff formatter default; reasonable for readable source and diffs.
+# WHY: Match Black/Ruff formatter default for Python lines.
+# Reasonable for readable source and diffs.
 line-length = 88
 
-# WHY: Avoid preview behavior in course repos; students should get stable diagnostics.
+# WHY: Avoid preview behavior in course repos.
 preview = false
 
-# WHY: Match the course Python target so modernization rules do not suggest older patterns.
+# WHY: Match the course Python target.
 target-version = "py314"
 
-# WHY: Do not apply fixes Ruff marks unsafe; student repos should avoid surprising rewrites.
+# WHY: Do not apply fixes Ruff marks unsafe; avoid surprising rewrites.
 unsafe-fixes = false
 
 
@@ -36,13 +68,13 @@ indent-style = "space"
 # WHY: Preserve platform-appropriate line endings instead of forcing surprises on Windows users.
 line-ending = "auto"
 
-# WHY: Preserve existing quote style to avoid noisy churn in student submissions.
+# WHY: Preserve existing quote style to avoid noisy churn.
 quote-style = "preserve"
 
 
 [tool.ruff.lint]
-# WHY: Student-safe professional baseline.
-# WHY: Stricter than Ruff defaults, but still teachable and fixable.
+# WHY: Safe professional baseline.
+# WHY: Stricter than Ruff defaults, still useful and fixable.
 # WHY: Avoid advanced typing/architecture rules; focus on correctness, clarity, docs, and security.
 select = [
     "E",   # WHY: Basic syntax and structural correctness.
@@ -53,7 +85,7 @@ select = [
     "B",   # WHY: Common bug patterns worth catching early.
 
     "PTH", # WHY: Enforce pathlib because it is the course/repo path standard.
-    "C4",  # WHY: Cleaner comprehensions; usually simple, teachable fixes.
+    "C4",  # WHY: Cleaner comprehensions; usually simple, useful fixes.
     "SIM", # WHY: Simplify obvious unnecessary complexity.
     "RET", # WHY: Encourage clear return flow.
 
@@ -90,5 +122,6 @@ force-sort-within-sections = true
 
 
 [tool.ruff.lint.pydocstyle]
-# WHY: Google style is readable for students and consistent across course docs/examples.
+# WHY: Google style is readable, structured, and standard for modern packages.
+# Teaches clean habits for documenting Args, Returns, and Raises blocks.
 convention = "google"

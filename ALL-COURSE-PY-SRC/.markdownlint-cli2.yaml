@@ -1,5 +1,5 @@
 # ============================================================
-# .markdownlint-cli2.yaml (ALL-REPOS)
+# .markdownlint-cli2.yaml (ALL-COURSE-PY-SRC REPOS)
 # ============================================================
 # Updated: 2026-06-27
 #
@@ -61,20 +61,28 @@ ignores:
 # === Markdown lint defaults ===
 
 config:
-  default: true # WHY: Enable default Markdown rules as the project baseline.
+  # WHY: Enable default rules as a stable baseline for authored Markdown.
+  default: true
 
   # === Line length ===
 
   MD013:
-    line_length: 100 # WHY: Keep authored prose readable in source and diffs.
-    headings: false # WHY: Long headings may be needed for clarity.
-    tables: false # WHY: Long table cells may be needed for readability.
-    code_blocks: false # WHY: Long code lines should not be wrapped by Markdown lint.
+    # WHY: Allow longer lines for course repos.
+    # CUSTOM: Try setting this to 100 as you gain experience.
+    line_length: 200
+    # WHY: Long headings can be necessary for clarity and SEO.
+    headings: false
+    # WHY: Long table cells can be necessary for readability and completeness.
+    tables: false
+    # WHY: Long lines in code blocks can be necessary for accurate examples.
+    code_blocks: false
 
   # === Document structure ===
 
-  MD025: false # WHY: Allow multiple top-level headings in README/docs/index style files.
+  # WHY: Allow multiple top-level headings in README and documentation index files.
+  MD025: false
 
   # === Inline HTML ===
 
-  MD033: false # WHY: Markdown allows raw HTML; docs may need embeds, details, video, images, and custom layout.
+  # WHY: Allow inline HTML for course repos.
+  MD033: false

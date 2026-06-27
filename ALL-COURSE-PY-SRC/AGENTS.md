@@ -38,7 +38,7 @@ When assisting with this repo:
 - Keep uv current.
 - Pin Python using uv.
 - Upgrade the lock file to assist with security.
-- Sync all dependencies (dev + docs) and upgrade.
+- Sync all dependencies (dev + docs) and upgrade to keep current.
 
 ```shell
 uv self update

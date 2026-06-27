@@ -1,27 +1,20 @@
 # ============================================================
 # .github/workflows/deploy-zensical.yml (ALL-PY-SRC)
 # ============================================================
-# Updated: 2026-06-06
-#
+# Updated: 2026-06-27
+
 # WHY: Build and deploy documentation to GitHub Pages on pushes to main.
-#
 # REQ: Repo Settings -> Pages -> Build and deployment -> Source:
 #      GitHub Actions
 # WHY: Without this setting, the deploy-pages action will fail with a 403.
-#
-# OBS: This workflow deploys only. Correctness of the build is validated
-#      by ci-python-zensical.yml before merging to main.
-# OBS: Deployment runs after CI passes on push to main, not on PRs.
-# WHY: PRs use CI to validate; deployment only happens on confirmed main commits.
 
+# Name shown in the repo Actions tab.
 name: Docs Deploy (Zensical)
 
 on:
-  workflow_dispatch:  # WHY: Allow manual redeploy from Actions tab if needed.
-  workflow_run:       # WHY: After successful CI on main, trigger deployment.
-    workflows: ["CI (Python + Zensical)"]
-    branches: [main]
-    types: [completed]
+  push:
+    branches: [main]  # WHY: Validate on every push to GitHub branch `main`.
+  workflow_dispatch:  # WHY: Allow manual trigger from Actions tab.
 
 permissions:
   contents: read        # WHY: Needed to checkout code.
@@ -46,16 +39,13 @@ jobs:
     env:
       UV_PYTHON: "3.14"   # WHY: Pin Python version for all steps in this job.
 
-    # WHY: Only run deployment if triggered manually or if the triggering CI workflow run concluded successfully.
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
-
     steps:
       # ============================================================
       # A) ASSEMBLE: Checkout code and set up environment
       # ============================================================
 
       - name: A1) Checkout repository code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         # WHY: Required so all subsequent steps can access repo files.
 
       - name: A2) Configure GitHub Pages
@@ -73,8 +63,8 @@ jobs:
       - name: A4) Install Python 3.14
         run: uv python install 3.14
 
-      - name: A5) Install all dependencies with locked versions
-        run: uv sync --extra dev --extra docs --locked
+      - name: A5) Install all dependencies with frozen versions (in uv.lock)
+        run: uv sync --extra dev --extra docs --frozen
         # WHY: Docs extras required for Zensical build; dev extras for consistency.
         # OBS: Deployment validates the committed lock file; it must not upgrade dependencies.
 

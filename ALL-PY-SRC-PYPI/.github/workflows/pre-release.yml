@@ -32,7 +32,7 @@ jobs:
       # === ASSEMBLE ===
 
       - name: A1) Checkout repository with full history and tags
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0   # WHY: hatch-vcs needs full history to derive version from tags.
           fetch-tags: true
@@ -88,8 +88,8 @@ jobs:
           fi
           echo "Artifact version matches tag."
 
-      - name: B5) Sync all dependencies with locked versions
-        run: uv sync --extra dev --extra docs --locked
+      - name: B5) Sync all dependencies with frozen versions (in uv.lock)
+        run: uv sync --extra dev --extra docs --frozen
 
       - name: B6) Validate built artifacts
         run: uvx twine check dist/*
