@@ -1,0 +1,65 @@
+# ============================================================
+# .github/workflows/links.yml (ALL-REPOS)
+# ============================================================
+# Updated: 2026-06-27
+
+# WHY: Automated link checking.
+# OBS: Behavior is configured in .github/lychee.toml in this repository.
+# OBS: Runs monthly on schedule; manual trigger also available.
+
+name: Check Links
+
+on:
+  pull_request: # WHY: Validates PR links before merge.
+  push:
+    branches: [main]  # WHY: Validate on every push to GitHub branch `main`.
+  schedule:
+    - cron: "0 6 1 * *" # WHY: Runs monthly on the 1st.
+  workflow_call: # WHY: Allow this workflow to be called by other workflows if needed.
+  workflow_dispatch: # WHY: Manual trigger - always available.
+
+concurrency:
+  # WHY: Prevent multiple simultaneous link checks on same ref
+  group: links-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read # WHY: Needed to checkout code.
+
+jobs:
+  lychee:
+    name: Link checks
+    runs-on: ubuntu-latest # WHY: Stable runner for lychee-action + bash steps.
+    timeout-minutes: 10 # WHY: Prevent hanging jobs.
+
+    steps:
+
+      # === ASSEMBLE ===
+
+      - name: A1) Checkout repository code
+        uses: actions/checkout@v7
+
+
+      # === GET BINARY LYCHEE ===
+
+      - name: B1) Install Lychee binary natively
+        run: |
+          # WHY: Bypasses potentially buggy upstream action scripts.
+          URL="https://github.com/lycheeverse/lychee-action/archive/refs/tags/v2.8.0.tar.gz"
+          curl -sSL "$URL" -o lychee.tar.gz
+          tar -xzf lychee.tar.gz
+          sudo mv lychee /usr/local/bin/
+          rm -rf lychee.tar.gz README.md docs/ complete/
+
+      # === CHECK  ===
+
+      - name: C2) Run Lychee link checker
+        run: |
+          # WHY: Evaluates targets using .github/lychee.toml config and builds the report.
+          # OBS: Outputs straight to GITHUB_STEP_SUMMARY avoiding nested file path failures.
+          lychee --config .github/lychee.toml \
+            --output "$GITHUB_STEP_SUMMARY" \
+            './**/*.md' \
+            './**/*.html' \
+            './**/*.yml' \
+            './**/*.yaml'
