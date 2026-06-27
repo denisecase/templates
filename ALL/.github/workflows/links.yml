@@ -45,7 +45,7 @@ jobs:
       - name: B1) Install Lychee binary natively
         run: |
           # WHY: Bypasses potentially buggy upstream action scripts.
-          URL="https://github.com/lycheeverse/lychee/releases/download/v0.24.2/lychee-v0.24.2-x86_64-unknown-linux-gnu.tar.gz"
+          URL="https://github.com/lycheeverse/lychee-action/archive/refs/tags/v2.8.0.tar.gz"
           curl -sSL "$URL" -o lychee.tar.gz
           tar -xzf lychee.tar.gz
           sudo mv lychee /usr/local/bin/
