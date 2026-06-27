@@ -1,7 +1,7 @@
 # ============================================================
-# .pre-commit-config.yaml (ALL-TS)
+# .pre-commit-config.yaml (ALL-TS-REPOS)
 # ============================================================
-# Updated: 2026-06-06
+# Updated: 2026-06-27
 #
 # REQ: Professional project repositories SHOULD include a pre-commit
 # configuration for basic file hygiene.

@@ -1,4 +1,4 @@
-# ./AGENTS.md (ALL-COURSE-PY-SRC)
+# ./AGENTS.md (ALL-COURSE-PY-SRC-REPOS)
 
 ## WHY
 

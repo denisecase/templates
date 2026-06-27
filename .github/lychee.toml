@@ -1,7 +1,7 @@
 # ============================================================
 # .github/lychee.toml (ALL-REPOS)
 # ============================================================
-# Updated: 2026-06-10
+# Updated: 2026-06-27
 
 # REQ: Automatic link checking using GitHub Actions and Lychee.
 # WHY: Shared Lychee configuration for documentation repositories.

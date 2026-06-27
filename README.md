@@ -1,9 +1,11 @@
 # Templates
 
+[![Docs](https://img.shields.io/badge/Docs-GitHub%20Pages-blue.svg)](https://denisecase.github.io/templates/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/MIT)
-[![CI Hygiene](https://github.com/denisecase/templates/actions/workflows/ci-hygiene.yml/badge.svg?branch=main)](https://github.com/denisecase/templates/actions/workflows/ci-hygiene.yml)
+[![CI (Python Zensical)](https://github.com/denisecase/templates/actions/workflows/ci-python-zensical.yml/badge.svg?branch=main)](https://github.com/denisecase/templates/actions/workflows/ci-python-zensical.yml)
+[![Deploy Docs](https://github.com/denisecase/templates/actions/workflows/deploy-zensical.yml/badge.svg?branch=main)](https://github.com/denisecase/templates/actions/workflows/deploy-zensical.yml)
 [![Check Links](https://github.com/denisecase/templates/actions/workflows/links.yml/badge.svg?branch=main)](https://github.com/denisecase/templates/actions/workflows/links.yml)
-[![Dependabot](https://img.shields.io/badge/Dependabot-enabled-brightgreen.svg)](https://github.com/denisecase/templates/security/)
+[![Dependabot](https://img.shields.io/badge/Dependabot-enabled-brightgreen.svg)](https://github.com/denisecase/templates/security)
 
 > Canonical baseline files for my repositories.
 
@@ -33,6 +35,14 @@ Copy and adapt files as needed.
 For managed updates, the `dc-up` command can fetch files from this repository
 and apply the appropriate layered baseline to a target repository.
 
+```shell
+# see what files the command would update
+uvx dc-up
+
+# actually add and overwrite the files listed (CAUTION: DESTRUCTIVE)
+uvx dc-up --write
+```
+
 ## Developer Command Reference
 
 <details>
@@ -43,9 +53,9 @@ and apply the appropriate layered baseline to a target repository.
 Open a machine terminal where you want the project:
 
 ```shell
-git clone https://github.com/denisecase/dc-up
+git clone https://github.com/denisecase/templates
 
-cd dc-up
+cd templates
 code .
 ```
 

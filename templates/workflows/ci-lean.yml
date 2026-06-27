@@ -40,7 +40,7 @@ jobs:
         # WHY: Needed to access files for checks.
         uses: actions/checkout@v7
 
-      - name: A2) Run pre-commit (all files)
+      - name: A2) Run pre-commit (on all files)
         # WHY: Single source of truth for locally runnable quality gates.
         # OBS: Fails if hooks would modify files; does not commit changes.
         id: precommit # WHY: Identify step for conditional follow-up. # WHY: Identify step for conditional follow-up.

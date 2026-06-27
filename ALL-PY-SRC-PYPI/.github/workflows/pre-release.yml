@@ -1,7 +1,7 @@
 # ============================================================
-# .github/workflows/pre-release.yml (ALL-PY-SRC-PYPI)
+# .github/workflows/pre-release.yml (ALL-PY-SRC-PYPI-REPOS)
 # ============================================================
-# Updated: 2026-06-06
+# Updated: 2026-06-27
 #
 # WHY: Validate tagged Python package artifacts before release.
 # REQ: Reusable by PyPI package repositories.
