@@ -38,6 +38,7 @@ and apply the appropriate layered baseline to a target repository.
 ```shell
 # see what files the command would update
 uvx dc-up
+uvx dc-up@latest
 
 # actually add and overwrite the files listed (CAUTION: DESTRUCTIVE)
 uvx dc-up --write
