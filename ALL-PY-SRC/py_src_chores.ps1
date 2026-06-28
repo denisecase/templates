@@ -37,4 +37,4 @@ uv run python -m pytest
 uv run python -m zensical build
 
 Write-Host "All commands executed successfully."
-Write-Host "Run the example app to verify .venv/ is working correctly."
+Write-Host "Run a Python module to verify .venv/ is working correctly."

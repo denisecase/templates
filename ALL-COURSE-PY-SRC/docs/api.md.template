@@ -3,9 +3,7 @@
 This page is auto-generated from Python docstrings.
 
 Early on, it may not be easy to read.
-It becomes more useful as you get more comfortable with
-project structure, modules, functions, and docstrings.
-
+It becomes more useful as we gain experience.
 
 ::: {{ src_package }}
 
