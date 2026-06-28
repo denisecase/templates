@@ -36,7 +36,7 @@ For managed updates, the `dc-up` command can fetch files from this repository
 and apply the appropriate layered baseline to a target repository.
 
 ```shell
-# see what files the command would update
+# see what files the command would update (optional, force latest)
 uvx dc-up
 uvx dc-up@latest
 

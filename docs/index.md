@@ -12,8 +12,9 @@ The current versions of software engineering project files.
 The templates are used with [dc-up](https://github.com/denisecase/dc-up).
 
 ```shell
-# see what files the command would update
+# see what files the command would update (optional, force latest)
 uvx dc-up
+uvx dc-up@latest
 
 # actually add and overwrite the files listed (CAUTION: DESTRUCTIVE)
 uvx dc-up --write
