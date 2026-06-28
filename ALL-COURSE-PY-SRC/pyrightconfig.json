@@ -15,6 +15,7 @@
     "build"
   ],
   "pythonVersion": "3.14",
+  "reportArgumentType": "none",
   "reportMissingTypeStubs": "none",
   "reportPrivateUsage": "none",
   "reportUnknownArgumentType": "none",
