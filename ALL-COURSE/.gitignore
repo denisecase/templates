@@ -16,9 +16,11 @@
 # *.log  # CUSTOM: Course logs are pushed for verification
 logs/
 
-# === Course instructor files using strict pyright ===
+# === Course instructor files ===
 
 pyrightconfig.json
+ml_check.ps1
+ml_clean.ps1
 
 
 # === Private notes and local-only files ===
