@@ -1,7 +1,7 @@
 # ============================================================
 # .gitignore (ALL-COURSE-REPOS)
 # ============================================================
-# Updated: 2026-06-24
+# Updated: 2026-06-28
 #
 # REQ: All professional GitHub project repositories MUST include .gitignore.
 # WHY: Keep generated artifacts, local state, secrets, and OS-specific files
@@ -21,6 +21,7 @@ logs/
 pyrightconfig.json
 ml_check.ps1
 ml_clean.ps1
+shape.ps1
 
 
 # === Private notes and local-only files ===
