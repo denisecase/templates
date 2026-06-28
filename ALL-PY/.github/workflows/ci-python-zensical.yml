@@ -8,6 +8,9 @@
 # REQ: CI MUST NOT introduce rules that are not reproducible locally.
 # OBS: CI validates only; it does not edit files or deploy docs.
 # OBS: yamllint config lives at .github/.yamllint.yml (not repo root).
+# TOOLING ONLY PYTHON REPOS need zensical, but not ruff, pyright, or pytest.
+# In pyproject.toml, they need zensical (if you want docs/)
+# but can use a simpler zensical.toml without API docs (mkdocs dep needed only for PY-SRC).
 
 # Name shown in the repo Actions tab.
 name: CI (Python + Zensical)

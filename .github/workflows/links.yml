@@ -38,28 +38,16 @@ jobs:
 
       - name: A1) Checkout repository code
         uses: actions/checkout@v7
+        # WHY: Required so Lychee can inspect repository files.
 
+      # === BASIC CHECKS ===
 
-      # === GET BINARY LYCHEE ===
-
-      - name: B1) Install Lychee binary natively
-        run: |
-          # WHY: Bypasses potentially buggy upstream action scripts.
-          URL="https://github.com/lycheeverse/lychee-action/archive/refs/tags/v2.8.0.tar.gz"
-          curl -sSL "$URL" -o lychee.tar.gz
-          tar -xzf lychee.tar.gz
-          sudo mv lychee /usr/local/bin/
-          rm -rf lychee.tar.gz README.md docs/ complete/
-
-      # === CHECK  ===
-
-      - name: C2) Run Lychee link checker
-        run: |
-          # WHY: Evaluates targets using .github/lychee.toml config and builds the report.
-          # OBS: Outputs straight to GITHUB_STEP_SUMMARY avoiding nested file path failures.
-          lychee --config .github/lychee.toml \
-            --output "$GITHUB_STEP_SUMMARY" \
-            './**/*.md' \
-            './**/*.html' \
-            './**/*.yml' \
+      - name: B1) Run Lychee
+        uses: lycheeverse/lychee-action@v2.8.0
+        with:
+          args: >
+            --config .github/lychee.toml
+            './**/*.md'
+            './**/*.html'
+            './**/*.yml'
             './**/*.yaml'
