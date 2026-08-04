@@ -1,7 +1,7 @@
 # ============================================================
 # .gitignore (ALL-COURSE-REPOS)
 # ============================================================
-# Updated: 2026-06-28
+# Updated: 2026-08-04
 #
 # REQ: All professional GitHub project repositories MUST include .gitignore.
 # WHY: Keep generated artifacts, local state, secrets, and OS-specific files
@@ -11,10 +11,10 @@
 
 # === Logs and generated runtime output (COURSE-REPOS) ===
 
-# WHY: Logs are useful during debugging and verification.
-# ALT: Comment when logs must be inspected or validated.
-# *.log  # CUSTOM: Course logs are pushed for verification
+# WHY: Ignore logs and runtime output by default; share only project.log for evidence.
+*.log
 logs/
+!/project.log
 
 # === Course instructor files ===
 
