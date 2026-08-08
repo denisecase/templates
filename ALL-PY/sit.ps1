@@ -2,15 +2,15 @@
 
 <#
 ============================================================
-py_src_chores.ps1 (ALL-PY-SRC-REPOS)
+sit.ps1 (ALL-PY-REPOS)
 ============================================================
-Updated: 2026-06-27
+Updated: 2026-08-08
 
-Update dependencies, lint, test, and build docs.
-For Python source repos only.
+Situate dependencies, lint, test, and build docs.
+For Python tooling repos only.
 
 Run with:
-.\py_src_chores.ps1
+.\sit.ps1
 #>
 
 Set-StrictMode -Version Latest
@@ -29,12 +29,7 @@ uv run pre-commit run --all-files
 # repeat if changes were made
 uv run pre-commit run --all-files
 
-# run common chores
-uv run ruff format .
-uv run ruff check . --fix
-uv run python -m pyright
-uv run python -m pytest
+# build docs
 uv run python -m zensical build
 
 Write-Host "All commands executed successfully."
-Write-Host "Run a Python module to verify .venv/ is working correctly."

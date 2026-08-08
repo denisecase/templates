@@ -29,7 +29,7 @@ exclude = [
 ]
 
 # WHY: Match the course Python target so version-specific inference is correct.
-pythonVersion = "3.14"
+pythonVersion = "3.15"
 
 # === RUFF: COURSE REPOSITORIES ===
 

@@ -1,7 +1,7 @@
 # ============================================================
-# pyproject.toml (ALL-PY-REPOS)
+# pyproject.toml (TEMPLATES)
 # ============================================================
-# Updated: 2026-06-27
+# Updated: 2026-08-08
 # REQ.PYTHON: Python projects SHOULD include pyproject.toml as the single source of truth.
 # WHY: Centralizes Python tooling configuration even when the repo is not a package.
 
@@ -9,7 +9,7 @@
 name = "templates"
 version = "0.1.0"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.15"
 license = "MIT"
 authors = [{ name = "Denise Case" }]
 description = "Canonical repository baseline templates and tooling checks."

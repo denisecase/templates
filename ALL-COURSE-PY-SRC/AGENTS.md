@@ -42,7 +42,7 @@ When assisting with this repo:
 
 ```shell
 uv self update
-uv python pin 3.14
+uv python pin 3.15
 uv lock --upgrade
 uv sync --extra dev --extra docs --upgrade
 ```
