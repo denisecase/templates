@@ -68,13 +68,13 @@ uv python pin 3.14
 uv lock --upgrade
 uv sync --extra dev --extra docs --upgrade
 
-uvx pre-commit install
-uvx pre-commit autoupdate
+uv run pre-commit install
+uv run pre-commit autoupdate
 
 git add -A
-uvx pre-commit run --all-files
+uv run pre-commit run --all-files
 # repeat if changes were made
-uvx pre-commit run --all-files
+uv run pre-commit run --all-files
 
 npx markdownlint-cli2 --fix
 
