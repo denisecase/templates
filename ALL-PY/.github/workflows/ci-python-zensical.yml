@@ -1,7 +1,7 @@
 # ============================================================
 # .github/workflows/ci-python-zensical.yml (ALL-PY-REPOS)
 # ============================================================
-# Updated: 2026-06-27
+# Updated: 2026-08-08
 
 # WHY: Continuous Integration (CI) ensures repository hygiene,
 #      Python correctness, and documentation builds.
@@ -18,6 +18,8 @@ name: CI (Python + Zensical)
 on:
   push:
     branches: [main]  # WHY: Validate on every push to GitHub branch `main`.
+  pull_request:
+    branches: [main]  # WHY: Validate any pull requests (PRs) before merge.
   workflow_dispatch:  # WHY: Allow manual trigger from Actions tab.
 
 permissions:          # Least-privilege: this job only needs to READ.
@@ -39,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest  # WHY: Linux matches most production deployments.
     timeout-minutes: 30     # WHY: Fail fast if a step hangs unexpectedly.
     env:
-      UV_PYTHON: "3.14"     # WHY: Pin Python version for all steps in this job.
+      UV_PYTHON: "3.15"     # WHY: Pin Python version for all steps in this job.
 
     steps:
       # ============================================================
@@ -58,8 +60,8 @@ jobs:
           cache-dependency-glob: "uv.lock"
           # WHY: Invalidate cache only when locked dependencies change.
 
-      - name: A3) Install Python 3.14
-        run: uv python install 3.14
+      - name: A3) Install Python ${{ env.UV_PYTHON }} in uv
+        run: uv python install ${{ env.UV_PYTHON }}
         # WHY: Ensures the pinned Python version is available in CI.
         # OBS: Does not modify the repo; uv manages the interpreter locally.
 
