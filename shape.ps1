@@ -1,7 +1,7 @@
 # ============================================================
-# shape.ps1
+# shape.ps1 (ALL-REPOS)
 # ============================================================
-# Updated: 2026-08-04
+# Updated: 2026-08-08
 #
 # REQ: List project working files.
 # WHY: Provide a concise, copyable view of the current project structure.
