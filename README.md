@@ -42,6 +42,9 @@ uvx pup-up
 # same, but force the latest pup-up version
 uvx pup-up@latest
 
+# see the differences
+uvx pup-up --diff
+
 # actually add and overwrite the files listed (CAUTION: DESTRUCTIVE)
 uvx pup-up --write
 ```
