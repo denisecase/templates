@@ -1,7 +1,7 @@
 # ============================================================
 # .github/workflows/links.yml (ALL-REPOS)
 # ============================================================
-# Updated: 2026-08-04
+# Updated: 2026-08-08
 
 # WHY: Automated link checking.
 # OBS: Behavior is configured in .github/lychee.toml in this repository.
@@ -40,7 +40,7 @@ jobs:
 
       # === BASIC CHECKS ===
 
-      - name: B1) Run Lychee
+      - name: B1) Run Lychee link checker
         uses: lycheeverse/lychee-action@v2.9.0
         with:
           args: >

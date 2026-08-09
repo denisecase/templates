@@ -10,7 +10,7 @@
 
 # === pup-up fragments ===
 
-# WHY: pup-up may provide temporary configuration fragments for manual merging.
+# WHY: The pup-up (professional Python project updater) may provide temporary configuration fragments for manual merging.
 # WHY: Ruff settings belong in the repository's authoritative pyproject.toml.
 /pyproject.toml.ruff
 
