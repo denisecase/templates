@@ -14,7 +14,7 @@
     "dist",
     "build"
   ],
-  "pythonVersion": "3.14",
+  "pythonVersion": "3.15",
   "reportArgumentType": "none",
   "reportMissingTypeStubs": "none",
   "reportPrivateUsage": "none",

@@ -1,4 +1,4 @@
-# ./AGENTS.md (ALL-REPOS)
+# ./AGENTS.md (ALL-COURSE-REPOS)
 
 ## WHY
 

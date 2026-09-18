@@ -1,40 +1,77 @@
 # ============================================================
-# shape.ps1
+# shape.ps1 (ALL-REPOS)
 # ============================================================
-# Updated: 2026-06-10
+# Updated: 2026-08-16
 #
-# REQ: List repository working files while respecting .gitignore.
-# WHY: Use Git's own ignore rules instead of duplicating ignore patterns here.
-# OBS: Includes tracked files and untracked non-ignored files.
-# OBS: Excludes ignored files, .git internals, build output, caches, node_modules, etc.
-# OBS: Reflects the working tree as it is NOW: files moved/renamed/deleted on
-#      disk but not yet staged are dropped, so stale index paths don't appear.
-# CUSTOM: Add path filters only if you want a narrower repo shape.
-
-# Run with:
+# REQ: List project working files and directories that currently exist on disk.
+# WHY: Provide a concise, copyable view of the current project structure.
+# OBS: Does NOT depend on Git tracking or staging status.
+# OBS: Newly created files and directories appear immediately without git add.
+# OBS: Empty authored directories are included in the project shape.
+# OBS: Excludes common generated, cached, virtual environment, and build folders.
+# CUSTOM: Add path filters only if you want a narrower project shape.
+#
+# Run in a PowerShell terminal (available cross platform) with:
 # .\shape.ps1
 
-Clear-Host
 
-# WHY: Must run from inside a Git repository.
-$repoRoot = git rev-parse --show-toplevel 2>$null
+# === CONFIGURE EXCLUDED DIRECTORIES ===
 
-if (-not $repoRoot) {
-    Write-Error "Not inside a Git repository."
-    exit 1
-}
+# WHY: These directories contain generated, cached, downloaded, or temporary
+#      content rather than authored project structure.
 
-Set-Location $repoRoot
+$excludedDirectories = @(
+    ".git",
+    ".venv",
+    "__pycache__",
+    ".cache",
+    ".ruff_cache",
+    ".pytest_cache",
+    ".mypy_cache",
+    ".tox",
+    ".nox",
+    "node_modules",
+    "build",
+    "dist",
+    "site"
+)
 
-# WHY: --cached lists the INDEX, which still holds files moved/renamed/
-#      deleted on disk but not staged. Subtract --deleted (tracked files
-#      now missing from disk) so listing shows the current on-disk shape
-#      without requiring a git add first.
-$deleted = git ls-files --deleted
 
-git ls-files --cached --others --exclude-standard |
-    Where-Object { $deleted -notcontains $_ } |
-    Sort-Object -Unique |
+# === GET PROJECT SHAPE ===
+
+$projectRoot = (Get-Location).Path
+
+Get-ChildItem -Path $projectRoot -Recurse -Force |
+    Where-Object {
+        $relativePath = [System.IO.Path]::GetRelativePath(
+            $projectRoot,
+            $_.FullName
+        )
+
+        $pathParts = $relativePath -split '[\\/]'
+
+        $exclude = $false
+
+        foreach ($directory in $excludedDirectories) {
+            if ($pathParts -contains $directory) {
+                $exclude = $true
+                break
+            }
+        }
+
+        -not $exclude
+    } |
     ForEach-Object {
-        ".\$_"
-    }
+        $relativePath = [System.IO.Path]::GetRelativePath(
+            $projectRoot,
+            $_.FullName
+        )
+
+        if ($_.PSIsContainer) {
+            ".\$relativePath\"
+        }
+        else {
+            ".\$relativePath"
+        }
+    } |
+    Sort-Object -Unique
