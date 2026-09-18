@@ -15,7 +15,7 @@ authors = [{ name = "Denise Case" }]
 description = "Canonical repository baseline templates and tooling checks."
 dependencies = []
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = ["pre-commit"]
 docs = ["zensical"]
 

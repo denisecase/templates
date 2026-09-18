@@ -65,8 +65,10 @@ code .
 ```shell
 uv self update
 uv python pin 3.14
+
+uv python install
 uv lock --upgrade
-uv sync --extra dev --extra docs --upgrade
+uv sync
 
 uvx pre-commit install
 uvx pre-commit autoupdate

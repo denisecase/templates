@@ -43,8 +43,10 @@ When assisting with this repo:
 ```shell
 uv self update
 uv python pin 3.14
+
+uv python install
 uv lock --upgrade
-uv sync --extra dev --extra docs --upgrade
+uv sync
 ```
 
 ## Common Tasks
@@ -56,7 +58,8 @@ Lint / format:
 ```shell
 uv run ruff format .
 uv run ruff check . --fix
-uv run python -m pyright
+
+uv run ty check
 uv run python -m pytest
 ```
 

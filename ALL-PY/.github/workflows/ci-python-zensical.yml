@@ -1,7 +1,7 @@
 # ============================================================
 # .github/workflows/ci-python-zensical.yml (ALL-PY-REPOS)
 # ============================================================
-# Updated: 2026-06-27
+# Updated: 2026-09-18
 
 # WHY: Continuous Integration (CI) ensures repository hygiene,
 #      Python correctness, and documentation builds.
@@ -32,6 +32,7 @@ concurrency:
 env:
   PYTHONUNBUFFERED: "1"     # WHY: Real-time log output in CI.
   PYTHONIOENCODING: "utf-8" # WHY: Consistent encoding across platforms.
+  UV_FROZEN: "1"            # WHY: CI MUST use the committed lockfile without updating it.
 
 jobs:
   ci:
@@ -51,21 +52,22 @@ jobs:
         # WHY: Required so all subsequent steps can access repo files.
 
       - name: A2) Install uv (with caching)
-        uses: astral-sh/setup-uv@v8.2.0
+        uses: astral-sh/setup-uv@v10.1.0
         with:
           enable-cache: true
-          # WHY: Cache the uv tool itself for faster subsequent runs.
+          # WHY: Cache uv-managed artifacts for faster subsequent runs.
           cache-dependency-glob: "uv.lock"
-          # WHY: Invalidate cache only when locked dependencies change.
+          # WHY: Invalidate dependency cache when the committed lockfile changes.
 
-      - name: A3) Install Python 3.14
-        run: uv python install 3.14
-        # WHY: Ensures the pinned Python version is available in CI.
-        # OBS: Does not modify the repo; uv manages the interpreter locally.
+      - name: A3) Install project Python
+        run: uv python install
+        # WHY: Ensures the Python version declared in .python-version is available.
+        # OBS: uv manages the interpreter locally in the CI environment.
 
-      - name: A4) Install all dependencies with frozen versions (in uv.lock)
-        run: uv sync --extra dev --extra docs --frozen
-        # WHY: Install dev and docs extras so all check and build tools are available.
+      - name: A4) Install dependencies from committed lockfile
+        run: uv sync --frozen
+        # WHY: Install all configured dependency groups exactly from uv.lock.
+        # REQ: CI MUST fail rather than update a stale or incompatible lockfile.
 
       - name: A5) Show tool versions
         run: |
@@ -91,7 +93,7 @@ jobs:
 
       - name: B1) Validate pyproject.toml schema
         run: uvx "validate-pyproject[all]" pyproject.toml
-        # WHY: Catches malformed pyproject.toml before a broken release.
+        # WHY: Catches malformed pyproject.toml early in the CI process.
 
       # ============================================================
       # D) Docs build (no deployment)
@@ -104,7 +106,7 @@ jobs:
           else
             echo "No zensical.toml found; skipping docs build."
           fi
-        # WHY: Confirms docs build cleanly without errors or broken references.
-        # OBS: Build only; deployment is handled by a separate workflow if needed.
-        # OBS: Conditional on zensical.toml so this workflow is reusable across
-        #      repos that may not yet have docs configured.
+        # WHY: Confirm documentation builds without errors.
+        # OBS: This workflow builds only; deployment is handled separately.
+        # OBS: Conditional on zensical.toml so this workflow remains reusable
+        #      across src-layout Python repos that do not require documentation.
