@@ -1,15 +1,12 @@
 # ============================================================
 # .github/workflows/deploy-zensical.yml (ALL-PY-REPOS)
 # ============================================================
-# Updated: 2026-09-18
+# Updated: 2026-09-27
 #
 # WHY: Build and deploy documentation to GitHub Pages on pushes to main.
 # REQ: Repo Settings -> Pages -> Build and deployment -> Source:
 #      GitHub Actions
 # WHY: Without this setting, the deploy-pages action will fail with a 403.
-# REQ: Repository MUST contain .python-version.
-# WHY: The repository declares the Python version used locally and by CI.
-# REQ: Deployment MUST use the committed uv.lock without updating it.
 
 # Name shown in the repo Actions tab.
 name: Docs Deploy (Zensical)
@@ -20,9 +17,9 @@ on:
   workflow_dispatch:  # WHY: Allow manual trigger from Actions tab.
 
 permissions:
-  contents: read  # WHY: Needed to checkout code.
-  pages: write    # WHY: Required to deploy to GitHub Pages.
+  contents: read # WHY: Needed to checkout code.
   id-token: write # WHY: Required by deploy-pages for OIDC authentication.
+  pages: write # WHY: Required to deploy to GitHub Pages.
 
 concurrency:
   group: github-pages
@@ -49,16 +46,18 @@ jobs:
       # ============================================================
 
       - name: A1) Checkout repository code
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
         # WHY: Required so all subsequent steps can access repo files.
 
       - name: A2) Configure GitHub Pages
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
         # WHY: Sets Pages metadata used by upload-pages-artifact and deploy-pages.
         # OBS: Must run before the build step so base URL is available if needed.
 
       - name: A3) Install uv (with caching)
-        uses: astral-sh/setup-uv@v10.1.0
+        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
@@ -84,10 +83,10 @@ jobs:
         # WHY: Version output makes deployment logs easier to debug when tools change.
 
       # ============================================================
-      # D) DEPLOY: Build and publish docs
+      # B) BUILD ZENSICAL SITE
       # ============================================================
 
-      - name: D1) Build docs with Zensical
+      - name: B1) Build docs with Zensical
         run: |
           if [ ! -f "zensical.toml" ]; then
             echo "zensical.toml not found; refusing to deploy." >> "$GITHUB_STEP_SUMMARY"
@@ -98,7 +97,7 @@ jobs:
         # OBS: In CI (ci-python-zensical.yml) the missing config is a soft skip.
         #      Here it is a hard failure because a deploy without docs is wrong.
 
-      - name: D2) Verify site output exists
+      - name: B2) Verify site output exists
         run: |
           if [ ! -d "site" ]; then
             echo "## Documentation build output missing" >> "$GITHUB_STEP_SUMMARY"
@@ -110,15 +109,19 @@ jobs:
         # OBS: Zensical outputs to site/ by default; update this path if zensical.toml
         #      configures a different output directory.
 
-      - name: D3) Upload Pages artifact
-        uses: actions/upload-pages-artifact@v5
+      # ============================================================
+      # D) DEPLOY
+      # ============================================================
+
+      - name: D1) Upload Pages artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
           path: site
         # WHY: Packages the built static site for the deploy-pages action.
-        # OBS: path must match the output directory verified in D2.
+        # OBS: path must match the output directory
 
-      - name: D4) Deploy to GitHub Pages
-        uses: actions/deploy-pages@v5
+      - name: D2) Deploy to GitHub Pages
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
         # WHY: Publishes the uploaded artifact to GitHub Pages.
         # OBS: Requires pages: write and id-token: write permissions (set above).
         # OBS: The deployed URL is shown in the Actions log after this step completes.
