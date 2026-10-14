@@ -21,13 +21,13 @@ uv python pin 3.15
 uv lock --upgrade
 uv sync --extra dev --extra docs
 
-uv run pre-commit install
-uv run pre-commit autoupdate
+uvx prek install --force
+uvx prek update
 
 git add -A
-uv run pre-commit run --all-files
+uvx prek run --all-files
 # repeat if changes were made
-uv run pre-commit run --all-files
+uvx prek run --all-files
 
 # run common chores
 uv run ruff format .

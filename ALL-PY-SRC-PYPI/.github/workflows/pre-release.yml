@@ -1,7 +1,7 @@
 # ============================================================
 # .github/workflows/pre-release.yml (ALL-PY-SRC-PYPI-REPOS)
 # ============================================================
-# Updated: 2026-06-27
+# Updated: 2026-10-14
 #
 # WHY: Validate tagged Python package artifacts before release.
 # REQ: Reusable by PyPI package repositories.
@@ -39,7 +39,7 @@ jobs:
           ref: ${{ github.ref }}
 
       - name: A2) Install uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@v10.3.0
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
