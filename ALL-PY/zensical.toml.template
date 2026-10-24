@@ -1,7 +1,7 @@
 # ============================================================
 # zensical.toml (ALL-PY-REPOS)
 # ============================================================
-# Updated: 2026-06-27
+# Updated: 2026-10-24
 #
 # REQ: Python tooling only (no src) repositories SHOULD provide documentation configuration.
 # BUT Do not need mkdocs plugs used for src/ api generation.
@@ -23,6 +23,19 @@ edit_uri = "edit/main/docs/" # "Edit this page" links (GitHub)
 social = [
     {icon = "fontawesome/brands/github", link = "{{ repo_url }}" },
 ]
+
+# ------------------------------------------------------------
+# Markdown Extensions
+# ------------------------------------------------------------
+
+[project.markdown_extensions]
+admonition = {} # WHY: Allows shaded blocks see https://github.com/Python-Markdown/markdown/blob/master/docs/extensions/admonition.md
+md_in_html = {} # WHY: Allow Markdown inside HTML blocks when the opening tag includes `markdown`, e.g. <details markdown>...</details>
+# WHY: Render Mermaid diagrams in project documentation.
+pymdownx.superfences.custom_fences = [
+    { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
+
 
 # ------------------------------------------------------------
 # Plugins
